@@ -1,0 +1,324 @@
+Employe No,Job Title,Department,TEAMS,System,Salary,Job Start Date,Exit Date,Job Status,Employment type
+EMP-00061,Client Relationship Supervisor,Corporate Services,,,,1/15/2024,,Confirmed,Full Time
+EMP-00011,Senior Coder / ATL,Operations,Bredburry,Emis/Docman,70000,1/20/2025,,Confirmed,Full Time
+EMP-00012,Coder,Operations,School Lane,SystemONE,35000,3/18/2025,,Confirmed,Part Time
+EMP-00013,Senior Coder,Operations,Hereford,Emis/Docman,85000,7/8/2024,,Confirmed,Full Time
+EMP-00014,Assistant Clinical Coding Auditor,Audit Department,,Emis/Docman,75000,4/3/2025,,Confirmed,Full Time
+EMP-00015,Team Lead,Operations,Hazeldene,Emis/Docman,75000,3/2/2025,,Confirmed,Full Time
+EMP-00016,Coder,Operations,Acle,Emis/Docman,65000,3/18/2025,1/5/2026,Confirmed,Full Time
+EMP-00017,Senior Coder,Operations,The Hill,Emis/Docman,95000,12/22/2024,,Confirmed,Full Time
+EMP-00018,Coder,Operations,Hereford,Emis/Docman,50000,1/1/2025,,Confirmed,Part Time
+EMP-00019,Junior Coder,Operations,,,,3/17/2025,6/23/2025,,Left
+EMP-00020,Operations Supervisor/Trainer,Operations,Humble Yard,Emis/Docman,95000,12/20/2024,,Confirmed,Full Time
+EMP-00021,Team Lead,Operations,Hereford,Emis/Docman,80000,12/20/2024,,Confirmed,Full Time
+EMP-00022,Senior Coder / ATL,Operations,St Georges,Emis/Docman,70000,2/1/2025,,Confirmed,Full Time
+EMP-00023,Senior Coder / ATL,Operations,The Hill,Emis/Docman,65000,3/17/2025,,Confirmed,Full Time
+EMP-00024,Coder,Operations,Brompton,SystemONE,70000,5/27/2024,11/21/2025,Confirmed,Full Time
+EMP-00025,Coder,Operations,Humble Yard,SystemONE,43750,4/3/2025,,Confirmed,Full Time
+EMP-00026,Coder,Operations,,,,1/20/2025,6/23/2025,,Left
+EMP-00027,Team Lead,Operations,Hereford,Emis/Docman,80000,12/21/2024,,Confirmed,Full Time
+EMP-00028,Team Lead,Operations,Murdishaw,Emis/Docman,95000,4/1/2025,,Confirmed,Full Time
+EMP-00029,Team Lead,Operations,DonneyBrook,Emis/Docman,70000,12/21/2024,,Confirmed,Full Time
+EMP-00030,Clinical Coding Auditor,Audit Department,,,110000,8/1/2024,,Confirmed,Full Time
+EMP-00031,Team Lead,Operations,Manor Field,SystemONE,65000,2/17/2025,,Confirmed,Full Time
+EMP-00032,Coder,Operations,Brompton,SystemONE,70000,7/18/2024,11/5/2025,Confirmed,Full Time
+EMP-00033,Coder,Operations,Acle,SystemONE,35000,12/12/2024,,Confirmed,Part Time
+EMP-00034,Team Lead,Operations,,,,9/5/2024,8/4/2025,Confirmed,Left
+EMP-00035,Team Lead,Operations,DonneyBrook,SystemONE,95000,5/31/2024,,Confirmed,Full Time
+EMP-00036,Coder,Operations,Newton Heath,SystemONE,70000,2/27/2025,,Confirmed,Full Time
+EMP-00037,Client Relationship Supervisor,Corporate Services,,SystemONE,110000,5/15/2024,,Confirmed,Full Time
+EMP-00038,Senior Coder,Operations,Victoria Mills,Emis/Docman,70000,12/21/2024,,Confirmed,Full Time
+EMP-00039,Coder,Operations,Market Rasen,SystemONE,70000,3/17/2025,,Confirmed,Full Time
+EMP-00040,Senior Coder,Operations,Hereford,Emis/Docman,65000,3/17/2025,,Confirmed,Full Time
+EMP-00041,Senior Coder / ATL,Operations,Hereford,Emis/Docman,65000,3/10/2025,,Confirmed,Full Time
+EMP-00042,Team Lead,Operations,Gleebe,Emis/Docman,65000,3/7/2025,,Confirmed,Full Time
+EMP-00043,Senior Coder / ATL,Operations,Market Rasen,SystemONE,80000,12/22/2024,,Confirmed,Full Time
+EMP-00044,IT Technician,IT,Hereford,Emis/Docman,80000,1/16/2025,,Confirmed,Full Time
+EMP-00045,Team Lead,Operations,,Emis/Docman,65000,4/7/2025,,Confirmed,Full Time
+EMP-00046,Coder,Operations,Hereford,Emis/Docman,35000,5/15/2025,,Confirmed,Part Time
+EMP-00047,Coder,Operations,Manor Field,SystemONE,35000,3/20/2025,,Confirmed,Part Time
+EMP-00048,Senior Coder,Operations,Hereford,Emis/Docman,70000,4/7/2025,,Confirmed,Full Time
+EMP-00049,Coder,Operations,Victoria Mills,Emis/Docman,60000,2/22/2025,,Confirmed,Full Time
+EMP-00050,Senior Coder,Operations,Half Penny,SystemONE,80000,12/30/2024,,Confirmed,Full Time
+EMP-00051,Senior Coder / ATL,Operations,Hazeldene,Emis/Docman,65000,5/1/2025,,Confirmed,Full Time
+EMP-00052,Junior Coder,Operations,,,,5/1/2025,7/7/2025,,Left
+EMP-00053,Coder,Operations,Murdishaw,Emis/Docman,70000,11/15/2024,,Confirmed,Full Time
+EMP-00054,Operations Supervisor,Operations,Gleebe,Emis/Docman,95000,5/15/2024,,Confirmed,Full Time
+EMP-00055,Coder,Operations,Hereford,Emis/Docman,60000,3/10/2025,,Confirmed,Full Time
+EMP-00056,Operations Supervisor,Operations,,Emis/Docman,110000,12/22/2024,3/9/2026,Confirmed,Full Time
+EMP-00057,Coder,Operations,Gleebe,Emis/Docman,70000,5/15/2024,,Confirmed,Full Time
+EMP-00058,Medical Data Quality Specialist,Audit Department,Bredburry,Emis/Docman,37500,5/2/2025,12/1/2025,Confirmed,Part Time
+EMP-00059,Operations Supervisor,Operations,,SystemONE,160000,3/20/2025,2/28/2026,Confirmed,Full Time
+EMP-00062,Trainee,Operations,,,,5/22/2025,6/16/2025,,Left
+EMP-00063,Coder,Operations,Gleebe,Emis/Docman,65000,5/22/2025,10/29/2025,On Probation,Full Time
+EMP-00064,Senior Coder / ATL,Operations,Taunton Vale,EMIS,60000,5/22/2025,,On Probation,Full Time
+EMP-00065,Junior Coder,Operations,,,,3/14/2025,7/31/2025,,Left
+EMP-00066,Junior Coder,Operations,,,,5/22/2025,7/13/2025,,Left
+EMP-00067,Team Lead,Operations,The Grove,SystemONE,60000,5/22/2025,,On Probation,Full Time
+EMP-00068,Team Lead,Operations,Broom Leys,SystemONE,70000,5/22/2025,,On Probation,Full Time
+EMP-00069,Junior Coder,Operations,,,,7/3/2025,7/3/2025,,Left
+EMP-00070,Coder,Operations,The Grove,SystemONE,50000,6/10/2025,,On Probation,Full Time
+EMP-00071,Junior Coder,Operations,,,,6/10/2025,6/10/2025,,Left
+EMP-00072,Senior Coder / ATL,Operations,The Hill,Emis/Docman,50000,6/10/2025,,On Probation,Full Time
+EMP-00073,Junior Coder,Operations,Hereford,Emis/Docman,50000,6/10/2025,9/30/2025,On Probation,Full Time
+EMP-00074,Coder,Operations,Uplands,Emis/Docman,50000,6/10/2025,,On Probation,Full Time
+EMP-00075,Senior Coder / ATL,Operations,Old School,Emis/Docman,50000,6/10/2025,,On Probation,Full Time
+EMP-00076,Junior Coder,Operations,Newton Heath,SystemONE,62686,6/10/2025,11/5/2025,On Probation,Full Time
+EMP-00077,Junior Coder,Operations,,,,6/10/2025,6/30/2025,,Left
+EMP-00078,Coder,Operations,Half Penny,SystemONE,50000,6/10/2025,,On Probation,Full Time
+EMP-00079,Senior Coder / ATL,Operations,School Lane,SystemONE,50000,6/10/2025,,On Probation,Full Time
+EMP-00080,Senior Coder / ATL,Operations,High Green,SystemONE,50000,6/10/2025,,On Probation,Full Time
+EMP-00081,Junior Coder,Operations,Manor Field,SystemONE,50000,6/10/2025,12/19/2025,On Probation,Full Time
+EMP-00082,Coder,Operations,The Hill,Emis/Docman,83704,6/10/2025,1/22/2026,On Probation,Full Time
+EMP-00083,Junior Coder,Operations,,,,5/23/2025,7/4/2025,,Left
+EMP-00084,Coder,Operations,Broom Leys,SystemONE,60000,5/23/2025,12/9/2025,On Probation,Full Time
+EMP-00085,Trainee,Operations,,,30000,6/26/2025,6/26/2025,,
+EMP-00086,Junior Coder,Operations,Uplands,Emis/Docman,50000,6/26/2025,10/14/2025,On Probation,Full Time
+EMP-00087,Trainee,Operations,,,,7/3/2025,7/14/2025,,Left
+EMP-00088,Coder,Operations,Murdishaw,Emis/Docman,62686,6/26/2025,,On Probation,Full Time
+EMP-00089,Coder,Operations,Taunton Vale,Emis/Docman,50000,6/26/2025,,On Probation,Full Time
+EMP-00090,Senior Coder,Operations,Murdishaw,Emis/Docman,50000,6/26/2025,,On Probation,Full Time
+EMP-00091,Junior Coder,Operations,Humble Yard,SystemONE,50000,7/1/2025,2/16/2026,On Probation,Full Time
+EMP-00092,Junior Coder,Operations,,SystemONE,62686,7/3/2025,9/30/2025,On Probation,Full Time
+EMP-00093,Coder,Operations,School Lane,SystemONE,50000,7/1/2025,,On Probation,Full Time
+EMP-00094,Junior Coder,Operations,School Lane,SystemONE,55000,7/1/2025,9/18/2025,On Probation,Full Time
+EMP-00095,Senior Coder,Operations,Clarendon,Emis/Docman,55000,7/3/2025,,On Probation,Full Time
+EMP-00096,Trainee,Operations,,,,7/1/2025,7/2/2025,,Left
+EMP-00097,Coder,Operations,Old School,Emis/Docman,30000,7/1/2025,,On Probation,Full Time
+EMP-00098,Trainee,Operations,,,,7/3/2025,7/1/2025,,Left
+EMP-00099,Coder,Operations,High Green,SystemONE,50000,7/1/2025,,On Probation,Full Time
+EMP-00100,Junior Coder,Operations,Market Rasen,SystemONE,50000,7/3/2025,9/4/2025,On Probation,Full Time
+EMP-00101,Trainee,Operations,,,,7/1/2025,7/31/2025,,Left
+EMP-00102,Trainee,Operations,,,,7/9/2025,7/9/2025,,
+EMP-00103,Trainee,Operations,,,,7/3/2025,7/22/2025,,Left
+EMP-00104,Lead Trainer,Training,Hereford,Emis/Docman,70000,7/9/2025,,On Probation,Full Time
+EMP-00105,Junior Coder,Operations,SAS,SystemONE,50000,7/9/2025,9/15/2025,On Probation,Full Time
+EMP-00106,Trainee,Operations,,,,8/1/2025,8/1/2025,,Left
+EMP-00107,Trainee,Operations,,,,8/1/2025,8/1/2025,,Left
+EMP-00108,Coder,Operations,Clarendon,Emis/Docman,50000,7/9/2025,,On Probation,Full Time
+EMP-00109,Coder,Operations,Bredburry,Emis/Docman,30000,7/14/2025,,On Probation,Full Time
+EMP-00110,Trainee,Operations,,,,8/1/2025,8/1/2025,,Left
+EMP-00111,Trainee,Operations,,,,7/9/2025,8/11/2025,On Probation,Full Time
+EMP-00112,Junior Coder,Operations,SAS,SystemONE,50000,7/14/2025,9/1/2025,On Probation,Full Time
+EMP-00113,Trainee,Operations,,,,7/14/2025,7/14/2025,,Left
+EMP-00114,Junior Coder,Operations,Clarendon,Emis/Docman,30000,8/1/2025,12/31/2025,On Probation,Full Time
+EMP-00115,Coder,Operations,Hereford,Emis/Docman,50000,7/9/2025,,On Probation,Full Time
+EMP-00116,Junior Coder,Operations,The Hill,Emis/Docman,50000,7/9/2025,11/21/2025,On Probation,Full Time
+EMP-00117,Coder,Operations,Hereford,Emis/Docman,50000,7/14/2025,,On Probation,Full Time
+EMP-00118,Coder,Operations,School Lane,SystemONE,50000,7/14/2025,,On Probation,Full Time
+EMP-00119,Senior Coder,Operations,Market Rasen,SystemONE,30000,7/14/2025,,On Probation,Full Time
+EMP-00120,Trainee,Operations,,,,7/14/2025,8/6/2025,On Probation,Left
+EMP-00121,Trainee,Operations,Training,Emis/Docman,30000,7/14/2025,9/16/2025,On Probation,Full Time
+EMP-00122,Trainee,Operations,,,,7/14/2025,7/14/2025,,Left
+EMP-00123,Trainee,Operations,,,,7/14/2025,7/14/2025,,Left
+EMP-00124,Coder,Operations,Old School,Emis/Docman,30000,8/1/2025,,On Probation,Full Time
+EMP-00125,Trainee,Operations,,,,8/1/2025,8/1/2025,,Left
+EMP-00126,Trainee,Operations,,,,8/1/2025,8/1/2025,,Left
+EMP-00127,Trainee,Operations,,,,8/1/2025,8/1/2025,,Left
+EMP-00128,Coder,Operations,Half Penny,SystemONE,30000,8/1/2025,,On Probation,Full Time
+EMP-00129,Trainee,Operations,,,,8/1/2025,8/1/2025,,Left
+EMP-00130,Trainee,Operations,,,,8/1/2025,8/1/2025,,Left
+EMP-00131,Junior Coder,Operations,Manor Field,SystemONE,50000,7/18/2025,11/10/2025,On Probation,Full Time
+EMP-00132,Coder,Operations,School Lane,SystemONE,50000,7/18/2025,,On Probation,Full Time
+EMP-00133,Coder,Operations,Hereford,Emis/Docman,30000,8/1/2025,,On Probation,Full Time
+EMP-00134,Trainee,Operations,,,,8/1/2025,8/1/2025,,Left
+EMP-00135,Junior Coder,Operations,School Lane,SystemONE,30000,8/1/2025,12/5/2025,On Probation,Full Time
+EMP-00136,Junior Coder,Operations,Broom Leys,SystemONE,30000,8/1/2025,10/2/2025,On Probation,Full Time
+EMP-00137,Junior Coder,Operations,The Hill,Emis/Docman,30000,8/1/2025,10/6/2025,On Probation,Full Time
+EMP-00138,Coder,Operations,Market Rasen,SystemONE,30000,8/1/2025,,On Probation,Full Time
+EMP-00139,Junior Coder,Operations,School Lane,SystemONE,30000,8/1/2025,12/9/2025,On Probation,Full Time
+EMP-00140,Trainee,Operations,,,,8/1/2025,8/11/2025,On Probation,Full Time
+EMP-00141,Junior Coder,Operations,Acle,Emis/Docman,30000,8/1/2025,9/19/2025,On Probation,Full Time
+EMP-00142,Junior Coder,Operations,Bredburry,Emis/Docman,30000,8/1/2025,11/3/2025,On Probation,Full Time
+EMP-00143,Junior Coder,Operations,Hazeldene,Emis/Docman,30000,9/1/2025,10/24/2025,On Probation,Full Time
+EMP-00144,Coder,Operations,The Hill,Emis/Docman,30000,9/1/2025,,On Probation,Full Time
+EMP-00145,Coder,Operations,Hazeldene,Emis/Docman,30000,9/1/2025,,On Probation,Full Time
+EMP-00146,Coder,Operations,The Hill,Emis/Docman,30000,9/1/2025,,On Probation,Full Time
+EMP-00147,Trainee,Operations,,,30000,9/1/2025,9/25/2025,Training,Full Time
+EMP-00148,Coder,Operations,Taunton Vale,Emis,30000,9/1/2025,,On Probation,Full Time
+EMP-00149,Coder,Operations,Uplands,Emis/Docman,30000,9/1/2025,,On Probation,Full Time
+EMP-00150,Coder,Operations,LG,Emis,35000,9/1/2025,,On Probation,Full Time
+EMP-00151,Junior Coder,Operations,Gleebe,Emis,35000,9/1/2025,1/14/2026,On Probation,Full Time
+EMP-00152,Trainee,Operations,,,30000,9/1/2025,9/5/2025,Training,Full Time
+EMP-00153,Trainee,Operations,,,30000,9/1/2025,9/1/2025,Training,Full Time
+EMP-00154,Trainee,Operations,,,30000,9/1/2025,9/15/2025,Training,Full Time
+EMP-00155,Trainee,Operations,,,40000,9/1/2025,9/19/2025,Training,Full Time
+EMP-00156,Coder,Operations,School Lane,SystemONE,30000,9/1/2025,,On Probation,Full Time
+EMP-00157,Junior Coder,Operations,Broom Leys,SystemONE,30000,9/1/2025,11/1/2025,On Probation,Full Time
+EMP-00158,Junior Coder,Operations,The Grove,SystemONE,30000,9/1/2025,,On Probation,Full Time
+EMP-00159,Coder,Operations,School Lane,SystemONE,30000,9/1/2025,,On Probation,Full Time
+EMP-00160,Trainee,Operations,,,30000,9/1/2025,9/24/2025,Training,Full Time
+EMP-00161,Junior Coder,Operations,St Georges,Emis/Docman,40000,9/15/2025,11/10/2025,On Probation,Full Time
+EMP-00162,Coder,Operations,Clarendon,Emis/Docman,40000,9/15/2025,,On Probation,Full Time
+EMP-00163,Lead Trainer,Training,,,180000,8/5/2025,10/3/2025,Confirmed,Part Time
+EMP-00164,Junior Coder,Operations,Taunton Vale,Emis,40000,9/15/2025,1/1/2026,On Probation,Full Time
+EMP-00165,Coder,Operations,Bredburry,EMIS/Docman,30000,9/15/2025,,On Probation,Full Time
+EMP-00166,Assistant Clinical Coding Auditor,Audit Department,,EMIS/Docman,55000,9/15/2025,,On Probation,Full Time
+EMP-00167,Trainee,Operations,,EMIS/Docman,,9/15/2025,9/26/2025,Training,Full Time
+EMP-00168,Trainee,Operations,,,,10/1/2025,10/1/2025,Training,Full Time
+EMP-00169,Trainee,Operations,,SystemONE,30000,10/1/2025,1/1/2026,Training,Full Time
+EMP-00170,Coder,Operations,,,30000,10/1/2025,,On Probation,Full Time
+EMP-00171,Coder,Operations,,,35000,10/1/2025,,On Probation,Full Time
+EMP-00172,Junior Coder,Operations,,,40000,10/1/2025,2/6/2026,On Probation,Full Time
+EMP-00173,Coder,Operations,,,40000,10/1/2025,,On Probation,Full Time
+EMP-00174,Assistant Clinical Coding Auditor,Audit Department,,,40000,10/1/2025,,On Probation,Full Time
+EMP-00175,Trainee,Operations,,,,10/1/2025,10/1/2025,Training,Full Time
+EMP-00176,Trainee,Operations,,,,10/1/2025,10/1/2025,Training,Full Time
+EMP-00177,Trainee,Operations,,,,10/1/2025,10/1/2025,Training,Full Time
+EMP-00178,Trainee,Operations,,,35000,10/1/2025,12/19/2025,On Probation,Full Time
+EMP-00179,Coder,Operations,,,30000,10/1/2025,,On Probation,Full Time
+EMP-00180,Coder,Operations,,,30000,10/1/2025,,On Probation,Full Time
+EMP-00181,Coder,Operations,,,30000,10/1/2025,,On Probation,Full Time
+EMP-00182,Coder,Operations,,,30000,10/1/2025,,On Probation,Full Time
+EMP-00183,Trainee,Operations,,,30000,10/1/2025,10/13/2025,Training,Full Time
+EMP-00184,Trainee,Operations,,,30000,10/1/2025,10/13/2025,Training,Full Time
+EMP-00185,Coder,Operations,,,30000,10/1/2025,,On Probation,Full Time
+EMP-00186,Junior Coder,Operations,,,35000,10/1/2025,1/13/2026,On Probation,Full Time
+EMP-00187,Junior Coder,Operations,,,35000,10/1/2025,,On Probation,Full Time
+EMP-00188,Junior Coder,Operations,LG,,35000,10/20/2025,3/25/2026,On Probation,Full Time
+EMP-00189,Coder,Operations,LG,,35000,10/20/2025,,On Probation,Full Time
+EMP-00190,Junior Coder,Operations,LG,,35000,10/20/2025,,On Probation,Full Time
+EMP-00191,Coder,Operations,LG,,30000,10/20/2025,,On Probation,Full Time
+EMP-00192,Coder,Operations,LG,,30000,10/20/2025,,On Probation,Full Time
+EMP-00193,Coder,Operations,,,70000,10/27/2025,,On Probation,Full Time
+EMP-00194,Trainee,Operations,,,50000,10/27/2025,11/21/2025,On Probation,Full Time
+EMP-00195,Coder,Operations,,,35000,10/27/2025,,On Probation,Full Time
+EMP-00196,Junior Coder,Operations,,,40000,10/27/2025,,On Probation,Full Time
+EMP-00197,Junior Coder,Operations,,,30000,10/27/2025,,On Probation,Full Time
+EMP-00198,Junior Coder,Operations,,,35000,11/3/2025,,Training,Full Time
+EMP-00199,Junior Coder,Operations,,,35000,11/3/2025,,Training,Full Time
+EMP-00200,Trainee,Operations,,,40000,11/3/2025,11/3/2025,Training,Full Time
+EMP-00201,Trainee,Operations,,,30000,11/3/2025,11/3/2025,Training,Full Time
+EMP-00202,Junior Coder,Operations,,,35000,11/3/2025,,Training,Full Time
+EMP-00203,Junior Coder,Operations,,,40000,11/3/2025,2/10/2026,Training,Full Time
+EMP-00204,Assistant Clinical Coding Auditor,Audit Department,,,40000,11/3/2025,,Training,Full Time
+EMP-00205,Junior Coder,Operations,,,30000,11/3/2025,,Training,Full Time
+EMP-00206,Junior Coder,Operations,,,40000,11/3/2025,,Training,Full Time
+EMP-00207,Trainee,Operations,,,30000,11/3/2025,11/10/2025,Training,Full Time
+EMP-00208,Trainee,Operations,,,70000,11/3/2025,1/22/2026,Training,Full Time
+EMP-00209,Junior Coder,Operations,,Emis/Docman,50000,11/3/2025,,On Probation,Full Time
+EMP-00210,Junior Coder,Operations,,,50000,11/3/2025,,Training,Full Time
+EMP-00211,Trainee,Operations,,,35000,11/12/2025,1/20/2026,Training,Full Time
+EMP-00212,Junior Coder,Operations,,,30000,11/12/2025,,Training,Full Time
+EMP-00213,Junior Coder,Operations,,,50000,11/12/2025,,Training,Full Time
+EMP-00214,Junior Coder,Operations,,,35000,11/15/2025,,Training,Full Time
+EMP-00215,Trainee,Operations,,,30000,11/15/2025,1/12/2026,Training,Full Time
+EMP-00216,Junior Coder,Audit Department,,,40000,11/15/2025,,Training,Full Time
+EMP-00217,Junior Coder,Operations,,,35000,11/24/2025,3/12/2026,Training,Full Time
+EMP-00218,Junior Coder,Operations,,,35000,11/24/2025,,Training,Full Time
+EMP-00219,Junior Coder,Operations,,,35000,11/24/2025,,Training,Full Time
+EMP-00220,Junior Coder,Operations,,,30000,11/24/2025,,Training,Full Time
+EMP-00221,Junior Coder,Operations,,,35000,11/24/2025,,Training,Full Time
+EMP-00222,Trainee,Operations,,,30000,11/24/2025,1/1/2026,Training,Full Time
+EMP-00223,Junior Coder,Operations,,,30000,11/24/2025,,Training,Full Time
+EMP-00224,Junior Coder,Operations,,,35000,11/24/2025,3/2/2026,Training,Full Time
+EMP-00225,Junior Coder,Operations,,,35000,11/24/2025,1/29/2026,Training,Full Time
+EMP-00226,Trainee,Operations,,,30000,11/24/2025,12/8/2025,Training,Full Time
+EMP-00227,Junior Coder,Operations,,,35000,11/24/2025,,Training,Full Time
+EMP-00228,Junior Coder,Operations,,,30000,11/24/2025,,Training,Full Time
+EMP-00229,Junior Coder,Operations,,,35000,11/24/2025,3/3/2026,Training,Full Time
+EMP-00230,Junior Coder,Operations,,,30000,11/24/2025,3/2/2026,Training,Full Time
+EMP-00231,Junior Coder,Operations,,,50000,11/24/2025,,Training,Full Time
+EMP-00232,Trainee,Operations,,,30000,11/24/2025,1/7/2026,Training,Full Time
+EMP-00233,Junior Coder,Operations,,,95000,12/1/2025,,Training,Full Time
+EMP-00234,Junior Coder,Operations,,,35000,12/1/2025,,Training,Full Time
+EMP-00235,Trainee,Operations,,,40000,12/1/2025,12/1/2025,Training,Full Time
+EMP-00236,Junior Coder,Operations,,,40000,12/1/2025,2/23/2026,Training,Full Time
+EMP-00237,Junior Coder,Operations,,,35000,12/1/2025,,Training,Full Time
+EMP-00238,Junior Coder,Operations,,,35000,12/1/2025,,Training,Full Time
+EMP-00239,Junior Coder,Operations,,,35000,12/8/2025,,,Full Time
+EMP-00240,Junior Coder,Operations,,,40000,12/8/2025,,,
+EMP-00241,Junior Coder,Operations,,,35000,12/8/2025,,,
+EMP-00242,Trainee,Operations,,,35000,12/8/2025,12/12/2025,,
+EMP-00243,Junior Coder,Operations,,,35000,12/8/2025,,,
+EMP-00244,Junior Coder,Operations,,,35000,12/8/2025,,,
+EMP-00245,Junior Coder,Operations,,,35000,12/8/2025,1/20/2026,,
+EMP-00246,Junior Coder,Operations,,,40000,12/8/2025,,,
+EMP-00247,Junior Coder,Operations,,,30000,12/8/2025,,,
+EMP-00248,Junior Coder,Operations,,,35000,12/8/2025,,,
+EMP-00249,Junior Coder,Operations,,,35000,12/15/2025,,,
+EMP-00250,Trainee,Operations,,,35000,12/15/2025,12/26/2025,,
+EMP-00251,Junior Coder,Operations,,,30000,12/15/2025,,,
+EMP-00252,Junior Coder,Operations,,,30000,12/15/2025,,,
+EMP-00253,Junior Coder,Operations,,,40000,12/15/2025,,,
+EMP-00254,Junior Coder,Operations,,,40000,12/15/2025,,,
+EMP-00255,Junior Coder,Operations,,,35000,12/15/2025,,,
+EMP-00256,Trainee,Operations,,,30000,12/15/2025,1/19/2026,,
+EMP-00257,Junior Coder,Operations,,,35000,12/15/2025,,,
+EMP-00258,Junior Coder,Operations,,,35000,12/15/2025,,,
+EMP-00259,Junior Coder,Operations,,,40000,12/15/2025,,,
+EMP-00260,Junior Coder,Operations,,,40000,12/15/2025,,,
+EMP-00261,Trainee,Operations,,,30000,12/15/2025,2/6/2026,,
+EMP-00262,Junior Coder,Operations,,,35000,12/15/2025,,,
+EMP-00263,Junior Coder,Operations,,,40000,12/15/2025,,,
+EMP-00264,Trainee,Operations,,,30000,12/15/2025,1/8/2026,,
+EMP-00265,Junior Coder,Operations,,,35000,12/15/2025,,,
+EMP-00266,Junior Coder,Operations,,,40000,12/15/2025,,,
+EMP-00267,Project Manager,IT,,,35000,1/19/2026,,,
+EMP-00268,Junior Coder,Operations,,,35000,1/19/2026,,,
+EMP-00269,Junior Coder,Operations,,,35000,1/19/2026,,,
+EMP-00270,Trainee,Operations,,,30000,1/19/2026,1/19/2026,,
+EMP-00271,Junior Coder,Operations,,,30000,1/19/2026,,,
+EMP-00272,Junior Coder,Operations,,,35000,1/19/2026,,,
+EMP-00273,Junior Coder,Operations,,,30000,1/19/2026,,,
+EMP-00274,Junior Coder,Operations,,,35000,1/19/2026,,,
+EMP-00275,Junior Coder,Operations,,,30000,1/19/2026,,,
+EMP-00276,Junior Coder,Operations,,,35000,1/19/2026,,,
+EMP-00277,Junior Coder,Operations,,,35000,1/19/2026,,,
+EMP-00279,Senior Executive Legal HR & Compliance,Legal,,,80000,1/19/2026,2/23/2026,,
+EMP-00280,Junior Coder,Operations,,,35000,1/19/2026,,,
+EMP-00281,Junior Coder,Operations,,,40000,1/23/2026,,,
+EMP-00282,Junior Coder,Operations,,,30000,1/23/2026,2/25/2026,,
+EMP-00283,Trainee,Operations,,,30000,1/23/2026,,,
+EMP-00284,Junior Coder,Operations,,,30000,1/23/2026,1/23/2026,,
+EMP-00285,Junior Coder,Operations,,,30000,1/23/2026,,,
+EMP-00286,Junior Coder,Operations,,,30000,1/23/2026,,,
+EMP-00287,Junior Coder,Operations,,,50000,1/23/2026,,,
+EMP-00288,Junior Coder,Operations,,,30000,1/23/2026,,,
+EMP-00289,Junior Coder,Operations,,,35000,1/23/2026,,,
+EMP-00290,Junior Coder,Operations,,,30000,1/23/2026,,,
+,Trainee,Operations,,,30000,2/2/2026,,,
+EMP-00291,Junior Coder,Operations,,,40000,2/2/2026,2/2/2026,,
+EMP-00292,Junior Coder,Operations,,,30000,2/2/2026,2/2/2026,,
+EMP-00293,Junior Coder,Operations,,,30000,2/2/2026,,,
+EMP-00294,Junior Coder,Operations,,,30000,2/2/2026,,,
+EMP-00295,Junior Coder,Operations,,,30000,2/2/2026,,,
+EMP-00296,Junior Coder,Operations,,,35000,2/2/2026,,,
+EMP-00297,Junior Coder,Operations,,,35000,2/2/2026,,,
+EMP-00298,Junior Coder,Operations,,,35000,2/9/2026,,,
+EMP-00299,Junior Coder,Operations,,,35000,2/9/2026,,,
+EMP-00300,Junior Coder,Operations,,,35000,2/9/2026,,,
+EMP-00301,Junior Coder,Operations,,,35000,2/9/2026,,,
+EMP-00302,Junior Coder,Operations,,,35000,2/9/2026,3/9/2026,,
+EMP-00303,Trainee,Operations,,,30000,2/9/2026,,,
+EMP-00304,Trainee,Operations,,,40000,2/9/2026,,,
+EMP-00305,Trainee,Operations,,,30000,2/17/2026,3/2/2026,,
+EMP-00306,Trainee,Operations,,,30000,2/17/2026,2/17/2026,,
+EMP-00307,Trainee,Operations,,,40000,2/17/2026,,,
+EMP-00308,Trainee,Operations,,,30000,2/17/2026,,,
+EMP-00309,Trainee,Operations,,,30000,2/17/2026,,,
+EMP-00310,Trainee,Operations,,,35000,2/17/2026,,,
+EMP-00311,Trainee,Operations,,,30000,2/17/2026,,,
+EMP-00312,Trainee,Operations,,,35000,2/17/2026,,,
+EMP-00313,Trainee,Operations,,,30000,2/17/2026,,,
+EMP-00314,Trainee,Operations,,,40000,2/17/2026,2/25/2026,,
+EMP-00315,Trainee,Operations,,,30000,2/17/2026,,,
+EMP-00316,Trainee,Operations,,,30000,2/17/2026,,,
+EMP-00317,Trainee,Operations,,,30000,2/17/2026,,,
+EMP-00318,Trainee,Operations,,Emis/Docman,35000,2/17/2026,3/10/2026,,
+EMP-00319,Trainee,Operations,,Emis/Docman,30000,2/17/2026,,,
+EMP-00320,Trainee,Operations,,Emis/Docman,30000,2/17/2026,,,
+EMP-00321,Trainee,Operations,,Emis/Docman,30000,3/5/2026,,,
+EMP-00322,Trainee,Operations,,Emis/Docman,35000,3/5/2026,,,
+EMP-00323,Trainee,Operations,,Emis/Docman,30000,3/5/2026,,,
+EMP-00324,Trainee,Operations,,Emis/Docman,40000,3/5/2026,,,
+EMP-00325,Trainee,Operations,,Emis/Docman,35000,3/5/2026,,,
+EMP-00326,Trainee,Operations,,Emis/Docman,35000,3/5/2026,,,
+EMP-00327,Trainee,Operations,,Emis/Docman,30000,3/5/2026,,,
+EMP-00328,Trainee,Operations,,Emis/Docman,35000,3/5/2026,,,
+EMP-00329,Trainee,Operations,,Emis/Docman,35000,3/5/2026,,,
+EMP-00330,Trainee,Operations,,Emis/Docman,30000,3/5/2026,,,
+EMP-00331,Trainee,Operations,,Emis/Docman,35000,3/5/2026,,,
+,,,,,,3/5/2026,,,
+,,,,,,3/5/2026,,,
+,,,,,,3/5/2026,,,
