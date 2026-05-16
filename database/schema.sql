@@ -154,7 +154,23 @@ CREATE TABLE Salary_History (
     FOREIGN KEY (employee_id)
     REFERENCES Employee(employee_id)
 ) ENGINE=InnoDB;
+-- =========================
+-- INDEXES (MILESTONE 4 REQUIREMENT)
+-- =========================
 
+CREATE INDEX idx_team_department_id ON Team(department_id);
+
+CREATE INDEX idx_employment_employee_id ON Employment(employee_id);
+CREATE INDEX idx_employment_role_id ON Employment(role_id);
+CREATE INDEX idx_employment_department_id ON Employment(department_id);
+CREATE INDEX idx_employment_team_id ON Employment(team_id);
+CREATE INDEX idx_employment_system_id ON Employment(system_id);
+
+CREATE INDEX idx_probation_employee_id ON ProbationRecord(employee_id);
+
+CREATE INDEX idx_activitylog_employee_id ON Activity_Log(employee_id);
+
+CREATE INDEX idx_salary_employee_id ON Salary_History(employee_id);
 -- =========================
 -- Show Tables
 -- =========================
