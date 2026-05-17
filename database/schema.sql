@@ -244,3 +244,8 @@ INSERT INTO Team (team_name, department_id) VALUES
 ('Market Rasen', 1),
 ('Uplands', 1),
 ('Training', 5);
+
+SELECT TABLE_NAME, INDEX_NAME, COLUMN_NAME
+FROM INFORMATION_SCHEMA.STATISTICS
+WHERE TABLE_SCHEMA = 'EmpTrackPro';
+SHOW INDEX FROM Employment;
