@@ -1,0 +1,13 @@
+# Temporary Office/Word files
+~$*
+
+# System / temp files
+*.tmp
+
+# Python cache (if any)
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
