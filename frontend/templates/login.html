@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EmpTrack Pro — Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="login-body">
+
+  <div class="login-page">
+
+    <!-- Left Panel — Branding -->
+    <div class="login-left">
+      <div class="login-left__inner">
+
+        <div class="login-brand">
+          <div class="login-brand__logo">
+            <span class="logo-icon">ET</span>
+          </div>
+          <h1 class="login-brand__name">EmpTrack <span>Pro</span></h1>
+        </div>
+
+        <div class="login-left__headline">
+          <h2 class="login-left__title">Intelligent Employee<br>Lifecycle Management</h2>
+          <p class="login-left__subtitle">Streamline your workforce, track probation timelines, and gain real-time analytics — all in one place.</p>
+        </div>
+
+        <div class="login-features">
+          <div class="login-feature">
+            <div class="login-feature__icon">◎</div>
+            <div class="login-feature__text">
+              <strong>Role-Based Access</strong>
+              <span>Admin, HR, Manager, Employee views</span>
+            </div>
+          </div>
+          <div class="login-feature">
+            <div class="login-feature__icon">⏳</div>
+            <div class="login-feature__text">
+              <strong>Smart Probation Tracking</strong>
+              <span>Automated alerts & timelines</span>
+            </div>
+          </div>
+          <div class="login-feature">
+            <div class="login-feature__icon">◈</div>
+            <div class="login-feature__text">
+              <strong>Live Analytics</strong>
+              <span>Department & salary insights</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="login-left__footer">
+          <p>School of Computer Sciences &amp; IT</p>
+          <p>Institute of Management Sciences, Peshawar</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right Panel — Form -->
+    <div class="login-right">
+      <div class="login-form-wrapper">
+
+        <div class="login-form-header">
+          <h3 class="login-form-title">Welcome back</h3>
+          <p class="login-form-subtitle">Sign in to your account to continue</p>
+        </div>
+
+        <form class="login-form" method="POST" action="/login">
+
+          <div class="form-group">
+            <label class="form-label" for="username">Username</label>
+            <div class="form-input-wrap">
+              <span class="form-input-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </span>
+              <input
+                class="form-input"
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your username"
+                autocomplete="username"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <div class="form-input-wrap">
+              <span class="form-input-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </span>
+              <input
+                class="form-input"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              />
+              <button type="button" class="form-input-toggle" id="togglePassword" aria-label="Toggle password visibility">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-row form-row--space">
+            <label class="form-check">
+              <input type="checkbox" name="remember" id="remember" class="form-check__input"/>
+              <span class="form-check__box"></span>
+              <span class="form-check__label">Remember me</span>
+            </label>
+            <a href="#" class="form-link">Forgot password?</a>
+          </div>
+
+          <!-- Flash messages from Flask -->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert--{{ category }}">
+                  <span class="alert__icon">!</span>
+                  <span class="alert__text">{{ message }}</span>
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+          <button type="submit" class="btn-login">
+            <span>Sign In</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
+
+        </form>
+
+        <div class="login-form-divider">
+          <span>Quick access roles</span>
+        </div>
+
+        <div class="login-roles">
+          <button class="role-chip" type="button" onclick="fillDemo('admin','1234')">
+            <span class="role-chip__dot role-chip__dot--admin"></span>Admin
+          </button>
+          <button class="role-chip" type="button" onclick="fillDemo('hr_manager','hr123')">
+            <span class="role-chip__dot role-chip__dot--hr"></span>HR
+          </button>
+          <button class="role-chip" type="button" onclick="fillDemo('manager','mgr123')">
+            <span class="role-chip__dot role-chip__dot--manager"></span>Manager
+          </button>
+          <button class="role-chip" type="button" onclick="fillDemo('EMP-001','emp123')">
+            <span class="role-chip__dot role-chip__dot--employee"></span>Employee
+          </button>
+        </div>
+
+        <p class="login-form-credit">
+          Database Lab Project &mdash; IMSciences Peshawar &copy; 2025
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Toggle password visibility
+    document.getElementById('togglePassword').addEventListener('click', function () {
+      const input = document.getElementById('password');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    });
+
+    // Fill demo credentials
+    function fillDemo(user, pass) {
+      document.getElementById('username').value = user;
+      document.getElementById('password').value = pass;
+    }
+  </script>
+
+</body>
+</html>

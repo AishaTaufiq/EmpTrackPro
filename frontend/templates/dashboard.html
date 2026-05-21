@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EmpTrack Pro — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="app-body">
+
+<div class="app-layout">
+
+  <!-- ═══════════════════════════════════════
+       SIDEBAR
+  ═══════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar__brand">
+      <div class="sidebar__logo">
+        <span class="logo-icon">ET</span>
+      </div>
+      <div class="sidebar__brand-text">
+        <span class="sidebar__brand-name">EmpTrack <strong>Pro</strong></span>
+        <span class="sidebar__brand-sub">IMSciences</span>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+
+      <div class="nav-section">
+        <span class="nav-section__label">Overview</span>
+        <a href="{{ url_for('dashboard') }}" class="nav-item nav-item--active">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Dashboard</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Workforce</span>
+        <a href="{{ url_for('employees') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Employees</span>
+          <span class="nav-item__badge">{{ stats.total_employees }}</span>
+        </a>
+        <a href="{{ url_for('add_employee') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <line x1="19" y1="8" x2="19" y2="14"/>
+              <line x1="22" y1="11" x2="16" y2="11"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Add Employee</span>
+        </a>
+        <a href="{{ url_for('departments') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Departments</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Tracking</span>
+        <a href="{{ url_for('probation') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Probation</span>
+          <span class="nav-item__badge nav-item__badge--warn">{{ stats.probation_ending_soon }}</span>
+        </a>
+        <a href="{{ url_for('salary_history') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Salary History</span>
+        </a>
+        <a href="{{ url_for('activity_logs') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/>
+              <line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Activity Logs</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Reports</span>
+        <a href="{{ url_for('reports') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Reports</span>
+        </a>
+      </div>
+
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="sidebar__user">
+        <div class="sidebar__user-avatar">
+          <span>{{ current_user.username[:2]|upper }}</span>
+        </div>
+        <div class="sidebar__user-info">
+          <span class="sidebar__user-name">{{ current_user.username }}</span>
+          <span class="sidebar__user-role">{{ current_user.role }}</span>
+        </div>
+        <a href="{{ url_for('logout') }}" class="sidebar__logout" title="Logout">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ═══════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════ -->
+  <div class="main-wrap">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar__left">
+        <button class="topbar__menu-btn" id="menuToggle" aria-label="Toggle sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <div class="topbar__breadcrumb">
+          <span class="breadcrumb__root">EmpTrack Pro</span>
+          <span class="breadcrumb__sep">/</span>
+          <span class="breadcrumb__current">Dashboard</span>
+        </div>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__date" id="currentDate"></div>
+        <div class="topbar__notification">
+          <button class="notif-btn" aria-label="Notifications">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            {% if stats.probation_ending_soon > 0 %}
+            <span class="notif-btn__dot"></span>
+            {% endif %}
+          </button>
+        </div>
+        <a href="{{ url_for('profile') }}" class="topbar__profile">
+          <div class="topbar__avatar">{{ current_user.username[:2]|upper }}</div>
+        </a>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="main-content">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="page-header__text">
+          <h1 class="page-header__title">Good morning, {{ current_user.username }} 👋</h1>
+          <p class="page-header__subtitle">Here's what's happening with your workforce today.</p>
+        </div>
+        <div class="page-header__actions">
+          <a href="{{ url_for('reports') }}" class="btn btn--outline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Export Report
+          </a>
+          {% if current_user.role in ['HR Manager', 'Administrator', 'Admin'] %}
+          <a href="{{ url_for('add_employee') }}" class="btn btn--primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Add Employee
+          </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- ─── KPI METRIC CARDS ─── -->
+      <section class="metrics-grid">
+
+        <div class="metric-card metric-card--blue">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Total Employees</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.total_employees }}</div>
+          <div class="metric-card__delta metric-card__delta--up">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="18 15 12 9 6 15"/>
+            </svg>
+            +{{ stats.new_this_month }} this month
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--amber">
+          <div class="metric-card__header">
+            <span class="metric-card__label">On Probation</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.on_probation }}</div>
+          <div class="metric-card__delta metric-card__delta--warn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            {{ stats.probation_ending_soon }} ending soon
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--green">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Active Staff</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.active_employees }}</div>
+          <div class="metric-card__delta metric-card__delta--up">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="18 15 12 9 6 15"/>
+            </svg>
+            {{ stats.retention_rate }}% retention
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--red">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Departures (90d)</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.departures_90d }}</div>
+          <div class="metric-card__delta metric-card__delta--neutral">
+            {{ stats.turnover_rate }}% turnover rate
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ─── CHARTS ROW ─── -->
+      <section class="charts-grid">
+
+        <!-- Employment Type Donut -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <h3 class="chart-card__title">Employment Types</h3>
+            <span class="chart-card__subtitle">Current breakdown</span>
+          </div>
+          <div class="chart-card__body chart-card__body--donut">
+            <div class="chart-donut-wrap">
+              <canvas id="donutChart" width="180" height="180"></canvas>
+            </div>
+            <div class="chart-legend">
+              {% for item in employment_types %}
+              <div class="legend-item">
+                <span class="legend-dot" style="--dot-color: {{ item.color }}"></span>
+                <span class="legend-label">{{ item.label }}</span>
+                <span class="legend-val">{{ item.count }}</span>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly Hiring Bar Chart -->
+        <div class="chart-card chart-card--wide">
+          <div class="chart-card__header">
+            <h3 class="chart-card__title">Monthly Hiring Trend</h3>
+            <span class="chart-card__subtitle">Last 6 months</span>
+          </div>
+          <div class="chart-card__body">
+            <canvas id="barChart"></canvas>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ─── TABLES ROW ─── -->
+      <section class="tables-grid">
+
+        <!-- Recent Employees -->
+        <div class="table-card">
+          <div class="table-card__header">
+            <h3 class="table-card__title">Recent Employees</h3>
+            <a href="{{ url_for('employees') }}" class="table-card__link">View all →</a>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Department</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Joined</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for emp in recent_employees %}
+                <tr>
+                  <td>
+                    <div class="emp-cell">
+                      <div class="emp-avatar emp-avatar--{{ emp.avatar_color }}">
+                        {{ emp.initials }}
+                      </div>
+                      <div class="emp-info">
+                        <span class="emp-name">{{ emp.full_name }}</span>
+                        <span class="emp-id">{{ emp.employee_id }}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="dept-tag dept-tag--{{ emp.department_slug }}">
+                      {{ emp.department_name }}
+                    </span>
+                  </td>
+                  <td class="text-muted">{{ emp.role_name }}</td>
+                  <td>
+                    <span class="status-badge status-badge--{{ emp.job_status | lower }}">
+                      {{ emp.job_status }}
+                    </span>
+                  </td>
+                  <td class="text-muted">{{ emp.job_start_date }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                  <td colspan="5" class="text-muted" style="text-align:center; padding: 24px;">
+                    No employees found.
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Probation Alerts + Activity -->
+        <div class="side-cards">
+
+          <!-- Probation Alerts -->
+          <div class="table-card">
+            <div class="table-card__header">
+              <h3 class="table-card__title">
+                Probation Alerts
+                <span class="alert-badge">{{ probation_alerts | length }}</span>
+              </h3>
+              <a href="{{ url_for('probation') }}" class="table-card__link">View all →</a>
+            </div>
+            <div class="probation-list">
+              {% for p in probation_alerts %}
+              <div class="prob-item {% if p.days_remaining <= 14 %}prob-item--urgent{% endif %}">
+                <div class="emp-avatar emp-avatar--{{ p.avatar_color }} emp-avatar--sm">
+                  {{ p.initials }}
+                </div>
+                <div class="prob-item__detail">
+                  <span class="prob-item__name">{{ p.full_name }}</span>
+                  <span class="prob-item__dept">{{ p.department_name }} · {{ p.role_name }}</span>
+                  <div class="prob-bar">
+                    <div class="prob-bar__fill {% if p.days_remaining <= 14 %}prob-bar__fill--urgent{% elif p.days_remaining >= 40 %}prob-bar__fill--ok{% endif %}"
+                      data-progress="{{ p.progress_percent }}">
+                    </div>
+                  </div>
+                </div>
+                <span class="prob-item__days {% if p.days_remaining <= 14 %}prob-item__days--urgent{% elif p.days_remaining >= 40 %}prob-item__days--ok{% endif %}">
+                  {{ p.days_remaining }}d
+                </span>
+              </div>
+              {% else %}
+              <p class="text-muted" style="padding: 16px 20px; font-size:13px;">
+                No probation alerts.
+              </p>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="table-card">
+            <div class="table-card__header">
+              <h3 class="table-card__title">Recent Activity</h3>
+              <a href="{{ url_for('activity_logs') }}" class="table-card__link">View all →</a>
+            </div>
+            <div class="activity-list">
+              {% for log in recent_activity %}
+              <div class="activity-item">
+                <span class="activity-dot activity-dot--{{ log.dot_color }}"></span>
+                <div class="activity-item__text">
+                  <p>{{ log.action }}</p>
+                  <span class="activity-item__time">{{ log.action_time }}</span>
+                </div>
+              </div>
+              {% else %}
+              <p class="text-muted" style="padding: 16px 20px; font-size:13px;">
+                No recent activity.
+              </p>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ─── DEPT OVERVIEW ─── -->
+      <section class="dept-section">
+        <div class="table-card">
+          <div class="table-card__header">
+            <h3 class="table-card__title">Department Overview</h3>
+            <a href="{{ url_for('departments') }}" class="table-card__link">Manage →</a>
+          </div>
+          <div class="dept-grid">
+            {% for dept in departments %}
+            <div class="dept-card">
+              <div class="dept-card__top">
+                <div class="dept-card__icon dept-card__icon--{{ dept.color }}">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                  </svg>
+                </div>
+                <span class="dept-card__count">{{ dept.employee_count }}</span>
+              </div>
+              <div class="dept-card__name">{{ dept.department_name }}</div>
+              <div class="dept-card__bar">
+                <div class="dept-card__bar-fill dept-card__bar-fill--{{ dept.color }}"
+                     data-bar-percent="{{ dept.bar_percent }}">
+                </div>
+              </div>
+              <div class="dept-card__teams">{{ dept.team_count }} teams</div>
+            </div>
+            {% else %}
+            <p class="text-muted" style="padding: 16px; font-size:13px;">
+              No departments found.
+            </p>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script id="dashboard-data" type="application/json">
+{{ {
+  'employmentLabels': employment_types | map(attribute='label') | list,
+  'employmentData': employment_types | map(attribute='count') | list,
+  'employmentColors': employment_types | map(attribute='color') | list,
+  'hiringLabels': hiring_trend | map(attribute='month') | list,
+  'hiringData': hiring_trend | map(attribute='count') | list
+} | tojson }}
+</script>
+
+<script>
+  // Live date in topbar
+  const dateEl = document.getElementById('currentDate');
+  if (dateEl) {
+    const now = new Date();
+    dateEl.textContent = now.toLocaleDateString('en-PK', {
+      weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
+    });
+  }
+
+  // Sidebar toggle (mobile)
+  document.getElementById('menuToggle').addEventListener('click', function () {
+    document.getElementById('sidebar').classList.toggle('sidebar--open');
+  });
+
+  // Apply progress widths from data attributes
+  document.querySelectorAll('[data-progress]').forEach(el => {
+    const value = el.dataset.progress;
+    if (value) {
+      el.style.width = value + '%';
+    }
+  });
+  document.querySelectorAll('[data-bar-percent]').forEach(el => {
+    const value = el.dataset.barPercent;
+    if (value) {
+      el.style.width = value + '%';
+    }
+  });
+
+  // ── Chart data from Flask ──
+  const dashboardData = JSON.parse(document.getElementById('dashboard-data').textContent);
+  const employmentLabels = dashboardData.employmentLabels;
+  const employmentData = dashboardData.employmentData;
+  const employmentColors = dashboardData.employmentColors;
+  const hiringLabels = dashboardData.hiringLabels;
+  const hiringData = dashboardData.hiringData;
+
+  // ── Donut Chart ──
+  const donutCtx = document.getElementById('donutChart').getContext('2d');
+  new Chart(donutCtx, {
+    type: 'doughnut',
+    data: {
+      labels: employmentLabels,
+      datasets: [{
+        data: employmentData,
+        backgroundColor: employmentColors,
+        borderColor: '#ffffff',
+        borderWidth: 3,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: false,
+      cutout: '68%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              return ' ' + ctx.label + ': ' + ctx.raw + ' employees';
+            }
+          }
+        }
+      }
+    }
+  });
+
+  // ── Bar Chart ──
+  const barCtx = document.getElementById('barChart').getContext('2d');
+  new Chart(barCtx, {
+    type: 'bar',
+    data: {
+      labels: hiringLabels,
+      datasets: [{
+        label: 'New Hires',
+        data: hiringData,
+        backgroundColor: '#185FA5',
+        borderRadius: 6,
+        borderSkipped: false,
+        hoverBackgroundColor: '#0C447C'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              return ' ' + ctx.raw + ' new hires';
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: '#888780', font: { size: 12 } }
+        },
+        y: {
+          grid: { color: '#f0ede8' },
+          ticks: { color: '#888780', font: { size: 12 }, stepSize: 5 },
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

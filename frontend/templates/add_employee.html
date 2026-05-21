@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EmpTrack Pro — Add Employee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="app-body">
+
+<div class="app-layout">
+
+  <!-- ═══════════════════════════════════════
+       SIDEBAR
+  ═══════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar__brand">
+      <div class="sidebar__logo">
+        <span class="logo-icon">ET</span>
+      </div>
+      <div class="sidebar__brand-text">
+        <span class="sidebar__brand-name">EmpTrack <strong>Pro</strong></span>
+        <span class="sidebar__brand-sub">IMSciences</span>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+
+      <div class="nav-section">
+        <span class="nav-section__label">Overview</span>
+        <a href="{{ url_for('dashboard') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Dashboard</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Workforce</span>
+
+        <a href="{{ url_for('employees') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Employees</span>
+          <span class="nav-item__badge">{{ stats.total_employees }}</span>
+        </a>
+
+        <a href="{{ url_for('add_employee') }}" class="nav-item nav-item--active">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <line x1="19" y1="8" x2="19" y2="14"/>
+              <line x1="22" y1="11" x2="16" y2="11"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Add Employee</span>
+        </a>
+
+        <a href="{{ url_for('departments') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Departments</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Tracking</span>
+
+        <a href="{{ url_for('probation') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Probation</span>
+          <span class="nav-item__badge nav-item__badge--warn">{{ stats.on_probation }}</span>
+        </a>
+
+        <a href="{{ url_for('salary_history') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Salary History</span>
+        </a>
+
+        <a href="{{ url_for('activity_logs') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/>
+              <line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Activity Logs</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Reports</span>
+        <a href="{{ url_for('reports') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Reports</span>
+        </a>
+      </div>
+
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="sidebar__user">
+        <div class="sidebar__user-avatar">
+          <span>{{ current_user.username[:2]|upper }}</span>
+        </div>
+        <div class="sidebar__user-info">
+          <span class="sidebar__user-name">{{ current_user.username }}</span>
+          <span class="sidebar__user-role">{{ current_user.role }}</span>
+        </div>
+        <a href="{{ url_for('logout') }}" class="sidebar__logout" title="Logout">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ═══════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════ -->
+  <div class="main-wrap">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar__left">
+        <button class="topbar__menu-btn" id="menuToggle" aria-label="Toggle sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <div class="topbar__breadcrumb">
+          <span class="breadcrumb__root">EmpTrack Pro</span>
+          <span class="breadcrumb__sep">/</span>
+          <a href="{{ url_for('employees') }}" style="color:var(--color-text-muted); text-decoration:none;">Employees</a>
+          <span class="breadcrumb__sep">/</span>
+          <span class="breadcrumb__current">
+            {% if edit_mode %}Edit Employee{% else %}Add Employee{% endif %}
+          </span>
+        </div>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__date" id="currentDate"></div>
+        <div class="topbar__notification">
+          <button class="notif-btn" aria-label="Notifications">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            {% if stats.on_probation > 0 %}
+            <span class="notif-btn__dot"></span>
+            {% endif %}
+          </button>
+        </div>
+        <a href="{{ url_for('profile') }}" class="topbar__profile">
+          <div class="topbar__avatar">{{ current_user.username[:2]|upper }}</div>
+        </a>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="main-content">
+
+      <!-- Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert--{{ category }}">
+            <span class="alert__icon">
+              {% if category == 'error' %}✕{% else %}✓{% endif %}
+            </span>
+            <span class="alert__text">{{ message }}</span>
+          </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="page-header__text">
+          <h1 class="page-header__title">
+            {% if edit_mode %}Edit Employee{% else %}Add New Employee{% endif %}
+          </h1>
+          <p class="page-header__subtitle">
+            {% if edit_mode %}
+              Update employee record and employment details.
+            {% else %}
+              Fill in the details below to register a new employee in the system.
+            {% endif %}
+          </p>
+        </div>
+        <div class="page-header__actions">
+          <a href="{{ url_for('employees') }}" class="btn btn--outline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Back to Employees
+          </a>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           FORM
+      ═══════════════════════════════════════ -->
+      <form method="POST"
+            action="{% if edit_mode %}{{ url_for('edit_employee', employee_id=employee.employee_id) }}{% else %}{{ url_for('add_employee') }}{% endif %}"
+            id="employeeForm"
+            novalidate>
+
+        <div class="addform-layout">
+
+          <!-- ─── LEFT COLUMN ─── -->
+          <div class="addform-left">
+
+            <!-- ── Section 1: Personal Information ── -->
+            <div class="table-card addform-section">
+              <div class="addform-section__header">
+                <div class="addform-section__icon addform-section__icon--blue">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="addform-section__title">Personal Information</h3>
+                  <p class="addform-section__subtitle">Basic employee identity details</p>
+                </div>
+              </div>
+
+              <div class="addform-grid">
+
+                <!-- Employee ID -->
+                <div class="addform-field addform-field--full">
+                  <label class="addform-label" for="employee_id">
+                    Employee ID
+                    <span class="addform-badge">Auto Generated</span>
+                  </label>
+                  <input
+                    class="addform-input addform-input--readonly"
+                    type="text"
+                    id="employee_id"
+                    name="employee_id"
+                    value="{% if edit_mode %}{{ employee.employee_id }}{% else %}{{ next_employee_id }}{% endif %}"
+                    readonly
+                  />
+                </div>
+
+                <!-- Prefix -->
+                <div class="addform-field">
+                  <label class="addform-label" for="prefix">Prefix</label>
+                  <select class="addform-select" id="prefix" name="prefix">
+                    <option value="">Select</option>
+                    {% set prefixes = ['Mr.', 'Ms.', 'Mrs.', 'Dr.', 'Prof.', 'Eng.'] %}
+                    {% for p in prefixes %}
+                    <option value="{{ p }}"
+                      {% if edit_mode and employee.prefix == p %}selected
+                      {% elif not edit_mode and request.form.get('prefix') == p %}selected
+                      {% endif %}>{{ p }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <!-- First Name -->
+                <div class="addform-field">
+                  <label class="addform-label" for="first_name">
+                    First Name <span class="addform-required">*</span>
+                  </label>
+                  <input
+                    class="addform-input"
+                    type="text"
+                    id="first_name"
+                    name="first_name"
+                    placeholder="e.g. Maryam"
+                    value="{% if edit_mode %}{{ employee.first_name }}{% else %}{{ request.form.get('first_name', '') }}{% endif %}"
+                    required
+                  />
+                </div>
+
+                <!-- Last Name -->
+                <div class="addform-field">
+                  <label class="addform-label" for="last_name">
+                    Last Name <span class="addform-required">*</span>
+                  </label>
+                  <input
+                    class="addform-input"
+                    type="text"
+                    id="last_name"
+                    name="last_name"
+                    placeholder="e.g. Suleman"
+                    value="{% if edit_mode %}{{ employee.last_name }}{% else %}{{ request.form.get('last_name', '') }}{% endif %}"
+                    required
+                  />
+                </div>
+
+                <!-- Full Name -->
+                <div class="addform-field addform-field--full">
+                  <label class="addform-label" for="full_name">
+                    Full Name
+                    <span class="addform-badge">Auto-filled</span>
+                  </label>
+                  <input
+                    class="addform-input addform-input--readonly"
+                    type="text"
+                    id="full_name"
+                    name="full_name"
+                    placeholder="Will be filled automatically"
+                    value="{% if edit_mode %}{{ employee.full_name }}{% else %}{{ request.form.get('full_name', '') }}{% endif %}"
+                    readonly
+                  />
+                </div>
+
+              </div>
+            </div>
+
+            <!-- ── Section 2: Job Information ── -->
+            <div class="table-card addform-section">
+              <div class="addform-section__header">
+                <div class="addform-section__icon addform-section__icon--teal">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="addform-section__title">Job Information</h3>
+                  <p class="addform-section__subtitle">Department, role, and system access</p>
+                </div>
+              </div>
+
+              <div class="addform-grid">
+
+                <!-- Department -->
+                <div class="addform-field">
+                  <label class="addform-label" for="department_id">
+                    Department <span class="addform-required">*</span>
+                  </label>
+                  <select class="addform-select" id="department_id" name="department_id" required>
+                    <option value="">Select Department</option>
+                    {% for dept in departments %}
+                    <option value="{{ dept.department_id }}"
+                      {% if edit_mode and employment.department_id == dept.department_id %}selected
+                      {% elif not edit_mode and request.form.get('department_id') == dept.department_id|string %}selected
+                      {% endif %}>
+                      {{ dept.department_name }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <!-- Team -->
+                <div class="addform-field">
+                  <label class="addform-label" for="team_id">Team</label>
+                  <select class="addform-select" id="team_id" name="team_id">
+                    <option value="">Select Team</option>
+                    {% for team in teams %}
+                    <option value="{{ team.team_id }}"
+                      {% if edit_mode and employment.team_id == team.team_id %}selected
+                      {% elif not edit_mode and request.form.get('team_id') == team.team_id|string %}selected
+                      {% endif %}>
+                      {{ team.team_name }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <!-- Job Role -->
+                <div class="addform-field">
+                  <label class="addform-label" for="role_id">
+                    Job Role <span class="addform-required">*</span>
+                  </label>
+                  <select class="addform-select" id="role_id" name="role_id" required>
+                    <option value="">Select Role</option>
+                    {% for role in roles %}
+                    <option value="{{ role.role_id }}"
+                      {% if edit_mode and employment.role_id == role.role_id %}selected
+                      {% elif not edit_mode and request.form.get('role_id') == role.role_id|string %}selected
+                      {% endif %}>
+                      {{ role.role_name }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <!-- System Access -->
+                <div class="addform-field">
+                  <label class="addform-label" for="system_id">System Access</label>
+                  <select class="addform-select" id="system_id" name="system_id">
+                    <option value="">Select System</option>
+                    {% for sys in systems %}
+                    <option value="{{ sys.system_id }}"
+                      {% if edit_mode and employment.system_id == sys.system_id %}selected
+                      {% elif not edit_mode and request.form.get('system_id') == sys.system_id|string %}selected
+                      {% endif %}>
+                      {{ sys.system_name }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- ── Section 3: Employment Details ── -->
+            <div class="table-card addform-section">
+              <div class="addform-section__header">
+                <div class="addform-section__icon addform-section__icon--amber">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="1" x2="12" y2="23"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="addform-section__title">Employment Details</h3>
+                  <p class="addform-section__subtitle">Contract type, salary, and dates</p>
+                </div>
+              </div>
+
+              <div class="addform-grid">
+
+                <!-- Employment Type -->
+                <div class="addform-field">
+                  <label class="addform-label" for="employment_type">
+                    Employment Type <span class="addform-required">*</span>
+                  </label>
+                  <select class="addform-select" id="employment_type" name="employment_type" required>
+                    <option value="">Select Type</option>
+                    {% set emp_types = ['Full-time', 'Part-time', 'Contract'] %}
+                    {% for t in emp_types %}
+                    <option value="{{ t }}"
+                      {% if edit_mode and employment.employment_type == t %}selected
+                      {% elif not edit_mode and request.form.get('employment_type') == t %}selected
+                      {% endif %}>{{ t }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <!-- Job Status -->
+                <div class="addform-field">
+                  <label class="addform-label" for="job_status">
+                    Job Status <span class="addform-required">*</span>
+                  </label>
+                  <select class="addform-select" id="job_status" name="job_status"
+                          required onchange="toggleProbation(this.value)">
+                    <option value="">Select Status</option>
+                    {% set statuses = ['Active', 'Probation', 'Left'] %}
+                    {% for s in statuses %}
+                    <option value="{{ s }}"
+                      {% if edit_mode and employment.job_status == s %}selected
+                      {% elif not edit_mode and request.form.get('job_status') == s %}selected
+                      {% endif %}>{{ s }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <!-- Salary -->
+                <div class="addform-field">
+                  <label class="addform-label" for="salary">Salary (PKR)</label>
+                  <div class="addform-input-prefix-wrap">
+                    <span class="addform-input-prefix">PKR</span>
+                    <input
+                      class="addform-input addform-input--prefixed"
+                      type="number"
+                      id="salary"
+                      name="salary"
+                      placeholder="e.g. 85000"
+                      min="0"
+                      step="500"
+                      value="{% if edit_mode and employment.salary %}{{ employment.salary }}{% else %}{{ request.form.get('salary', '') }}{% endif %}"
+                    />
+                  </div>
+                </div>
+
+                <!-- Job Start Date -->
+                <div class="addform-field">
+                  <label class="addform-label" for="job_start_date">
+                    Job Start Date <span class="addform-required">*</span>
+                  </label>
+                  <input
+                    class="addform-input"
+                    type="date"
+                    id="job_start_date"
+                    name="job_start_date"
+                    value="{% if edit_mode and employment.job_start_date %}{{ employment.job_start_date.strftime('%Y-%m-%d') }}{% else %}{{ request.form.get('job_start_date', '') }}{% endif %}"
+                    required
+                  />
+                </div>
+
+                <!-- Exit Date -->
+                <div class="addform-field addform-field--full">
+                  <label class="addform-label" for="exit_date">
+                    Exit Date
+                    <span class="addform-badge">Leave blank if still employed</span>
+                  </label>
+                  <input
+                    class="addform-input"
+                    type="date"
+                    id="exit_date"
+                    name="exit_date"
+                    value="{% if edit_mode and employment.exit_date %}{{ employment.exit_date.strftime('%Y-%m-%d') }}{% else %}{{ request.form.get('exit_date', '') }}{% endif %}"
+                  />
+                </div>
+
+              </div>
+            </div>
+
+            <!-- ── Section 4: Probation (conditional) ── -->
+            <div class="table-card addform-section" id="probationSection">
+              <div class="addform-section__header">
+                <div class="addform-section__icon addform-section__icon--amber">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="addform-section__title">Probation Details</h3>
+                  <p class="addform-section__subtitle">Shown because job status is set to Probation</p>
+                </div>
+              </div>
+
+              <div class="addform-grid">
+
+                <!-- Probation Start -->
+                <div class="addform-field">
+                  <label class="addform-label" for="probation_start">Probation Start Date</label>
+                  <input
+                    class="addform-input"
+                    type="date"
+                    id="probation_start"
+                    name="probation_start"
+                    value="{{ request.form.get('probation_start', '') }}"
+                  />
+                </div>
+
+                <!-- Probation End -->
+                <div class="addform-field">
+                  <label class="addform-label" for="probation_end">
+                    Probation End Date
+                    <span class="addform-badge">Auto: +90 days</span>
+                  </label>
+                  <input
+                    class="addform-input"
+                    type="date"
+                    id="probation_end"
+                    name="probation_end"
+                    value="{{ request.form.get('probation_end', '') }}"
+                  />
+                </div>
+
+                <!-- Probation Status -->
+                <div class="addform-field addform-field--full">
+                  <label class="addform-label" for="probation_status">Probation Status</label>
+                  <select class="addform-select" id="probation_status" name="probation_status">
+                    {% set prob_statuses = ['Active', 'Confirmed', 'Extended', 'Failed'] %}
+                    {% for ps in prob_statuses %}
+                    <option value="{{ ps }}"
+                      {% if request.form.get('probation_status') == ps %}selected{% endif %}>
+                      {{ ps }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ─── RIGHT COLUMN ─── -->
+          <div class="addform-right">
+
+            <!-- ── Section 5: Account Credentials ── -->
+            <div class="table-card addform-section">
+              <div class="addform-section__header">
+                <div class="addform-section__icon addform-section__icon--green">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="addform-section__title">Account Credentials</h3>
+                  <p class="addform-section__subtitle">System login access for this employee</p>
+                </div>
+              </div>
+
+              <div class="addform-stack">
+
+                <!-- Username -->
+                <div class="addform-field addform-field--full">
+                  <label class="addform-label" for="username">
+                    Username <span class="addform-required">*</span>
+                  </label>
+                  <div class="form-input-wrap">
+                    <span class="form-input-icon">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                      </svg>
+                    </span>
+                    <input
+                      class="form-input"
+                      type="text"
+                      id="username"
+                      name="username"
+                      placeholder="e.g. maryam.suleman"
+                      value="{{ request.form.get('username', '') }}"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Password -->
+                <div class="addform-field addform-field--full">
+                  <label class="addform-label" for="password">
+                    Password
+                    {% if not edit_mode %}<span class="addform-required">*</span>{% endif %}
+                  </label>
+                  <div class="form-input-wrap">
+                    <span class="form-input-icon">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                      </svg>
+                    </span>
+                    <input
+                      class="form-input"
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="{% if edit_mode %}Leave blank to keep current{% else %}Enter password{% endif %}"
+                      {% if not edit_mode %}required{% endif %}
+                    />
+                    <button type="button" class="form-input-toggle"
+                            onclick="togglePass('password')" aria-label="Toggle password">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="addform-field addform-field--full">
+                  <label class="addform-label" for="confirm_password">
+                    Confirm Password
+                    {% if not edit_mode %}<span class="addform-required">*</span>{% endif %}
+                  </label>
+                  <div class="form-input-wrap">
+                    <span class="form-input-icon">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                    </span>
+                    <input
+                      class="form-input"
+                      type="password"
+                      id="confirm_password"
+                      name="confirm_password"
+                      placeholder="Re-enter password"
+                      {% if not edit_mode %}required{% endif %}
+                    />
+                    <button type="button" class="form-input-toggle"
+                            onclick="togglePass('confirm_password')" aria-label="Toggle confirm password">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <span class="addform-hint" id="passwordMatchHint"></span>
+                </div>
+
+                <!-- Role -->
+                <div class="addform-field addform-field--full">
+                  <label class="addform-label" for="user_role">
+                    System Role <span class="addform-required">*</span>
+                  </label>
+                  <select class="addform-select" id="user_role" name="user_role" required>
+                    <option value="">Select Role</option>
+                    {% set user_roles = ['Admin', 'Administrator', 'HR Manager', 'Manager', 'Employee', 'Viewer'] %}
+                    {% for ur in user_roles %}
+                    <option value="{{ ur }}"
+                      {% if request.form.get('user_role') == ur %}selected{% endif %}>
+                      {{ ur }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- ── Summary Preview Card ── -->
+            <div class="table-card addform-section addform-preview">
+              <div class="addform-section__header">
+                <div class="addform-section__icon addform-section__icon--blue">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="addform-section__title">Preview</h3>
+                  <p class="addform-section__subtitle">Live summary as you type</p>
+                </div>
+              </div>
+
+              <div class="addform-preview__body">
+                <div class="addform-preview__avatar" id="previewAvatar"
+                     data-edit="{{ 'true' if edit_mode else 'false' }}"
+                     data-initials="{{ employee.full_name[:2]|upper if edit_mode and employee.full_name else '?' }}"
+                     data-name="{{ employee.full_name if edit_mode and employee.full_name else '' }}">
+                  {% if edit_mode and employee.full_name %}{{ employee.full_name[:2]|upper }}{% else %}?{% endif %}
+                </div>
+                <div class="addform-preview__name" id="previewName">Full Name</div>
+                <div class="addform-preview__id" id="previewId">
+                  {{ next_employee_id if not edit_mode else employee.employee_id }}
+                </div>
+                <div class="addform-preview__tags">
+                  <span class="dept-tag" id="previewDept">Department</span>
+                  <span class="dept-tag" id="previewRole">Role</span>
+                </div>
+                <div class="addform-preview__status" id="previewStatusWrap">
+                  <span class="status-badge status-badge--active" id="previewStatus">Active</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Action Buttons ── -->
+            <div class="table-card addform-section addform-actions-card">
+              <button type="submit" class="btn btn--primary addform-btn-full">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                  <polyline points="17 21 17 13 7 13 7 21"/>
+                  <polyline points="7 3 7 8 15 8"/>
+                </svg>
+                {% if edit_mode %}Update Employee{% else %}Save Employee{% endif %}
+              </button>
+
+              {% if not edit_mode %}
+              <button type="reset" class="btn btn--outline addform-btn-full" onclick="resetPreview()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="1 4 1 10 7 10"/>
+                  <path d="M3.51 15a9 9 0 1 0 .49-3.96"/>
+                </svg>
+                Reset Form
+              </button>
+              {% endif %}
+
+              <a href="{{ url_for('employees') }}" class="btn btn--outline addform-btn-full">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+                Cancel
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </form>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  // ── Live date ──
+  const dateEl = document.getElementById('currentDate');
+  if (dateEl) {
+    dateEl.textContent = new Date().toLocaleDateString('en-PK', {
+      weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
+    });
+  }
+
+  // ── Sidebar toggle ──
+  document.getElementById('menuToggle').addEventListener('click', function () {
+    document.getElementById('sidebar').classList.toggle('sidebar--open');
+  });
+
+  // ── Toggle password visibility ──
+  function togglePass(fieldId) {
+    const input = document.getElementById(fieldId);
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+
+  // ── Auto-fill full name ──
+  function updateFullName() {
+    const prefix = document.getElementById('prefix').value;
+    const first  = document.getElementById('first_name').value.trim();
+    const last   = document.getElementById('last_name').value.trim();
+    const full   = [prefix, first, last].filter(Boolean).join(' ');
+    document.getElementById('full_name').value = full;
+
+    // Update preview
+    const initials = ((first[0] || '') + (last[0] || '')).toUpperCase() || '?';
+    document.getElementById('previewAvatar').textContent = initials || '?';
+    document.getElementById('previewName').textContent   = full || 'Full Name';
+  }
+
+  ['prefix', 'first_name', 'last_name'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updateFullName);
+    document.getElementById(id).addEventListener('change', updateFullName);
+  });
+
+  // ── Update preview department ──
+  document.getElementById('department_id').addEventListener('change', function () {
+    const selected = this.options[this.selectedIndex];
+    document.getElementById('previewDept').textContent = selected.text || 'Department';
+  });
+
+  // ── Update preview role ──
+  document.getElementById('role_id').addEventListener('change', function () {
+    const selected = this.options[this.selectedIndex];
+    document.getElementById('previewRole').textContent = selected.text || 'Role';
+  });
+
+  // ── Update preview status badge ──
+  document.getElementById('job_status').addEventListener('change', function () {
+    const badge   = document.getElementById('previewStatus');
+    const val     = this.value;
+    badge.textContent = val || 'Status';
+    badge.className   = 'status-badge';
+    if (val === 'Active')    badge.classList.add('status-badge--active');
+    if (val === 'Probation') badge.classList.add('status-badge--probation');
+    if (val === 'Left')      badge.classList.add('status-badge--left');
+  });
+
+  // ── Show / hide probation section ──
+  function toggleProbation(value) {
+    const section = document.getElementById('probationSection');
+    section.style.display = (value === 'Probation') ? 'block' : 'none';
+
+    // Auto-fill probation dates from job start date
+    if (value === 'Probation') {
+      const startDate = document.getElementById('job_start_date').value;
+      if (startDate) {
+        document.getElementById('probation_start').value = startDate;
+        const endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + 90);
+        document.getElementById('probation_end').value = endDate.toISOString().split('T')[0];
+      }
+    }
+  }
+
+  // ── Auto-fill probation when job_start_date changes ──
+  document.getElementById('job_start_date').addEventListener('change', function () {
+    const status = document.getElementById('job_status').value;
+    if (status === 'Probation' && this.value) {
+      document.getElementById('probation_start').value = this.value;
+      const endDate = new Date(this.value);
+      endDate.setDate(endDate.getDate() + 90);
+      document.getElementById('probation_end').value = endDate.toISOString().split('T')[0];
+    }
+  });
+
+  // ── Password match check ──
+  document.getElementById('confirm_password').addEventListener('input', function () {
+    const hint = document.getElementById('passwordMatchHint');
+    const pass = document.getElementById('password').value;
+    if (!this.value) { hint.textContent = ''; return; }
+    if (this.value === pass) {
+      hint.textContent = '✓ Passwords match';
+      hint.style.color = 'var(--green-600)';
+    } else {
+      hint.textContent = '✕ Passwords do not match';
+      hint.style.color = 'var(--red-600)';
+    }
+  });
+
+  // ── Form validation before submit ──
+  document.getElementById('employeeForm').addEventListener('submit', function (e) {
+    const pass    = document.getElementById('password').value;
+    const confirm = document.getElementById('confirm_password').value;
+    if (pass && pass !== confirm) {
+      e.preventDefault();
+      alert('Passwords do not match. Please check and try again.');
+      document.getElementById('confirm_password').focus();
+    }
+  });
+
+  // ── Reset preview ──
+  function resetPreview() {
+    document.getElementById('previewAvatar').textContent = '?';
+    document.getElementById('previewName').textContent   = 'Full Name';
+    document.getElementById('previewDept').textContent   = 'Department';
+    document.getElementById('previewRole').textContent   = 'Role';
+    document.getElementById('previewStatus').textContent = 'Active';
+    document.getElementById('previewStatus').className   = 'status-badge status-badge--active';
+    document.getElementById('probationSection').style.display = 'none';
+    document.getElementById('passwordMatchHint').textContent  = '';
+  }
+
+  // ── Init preview on edit mode ──
+  (function () {
+    const avatar = document.getElementById('previewAvatar');
+    if (avatar && avatar.dataset.edit === 'true') {
+      avatar.textContent = avatar.dataset.initials || '??';
+      document.getElementById('previewName').textContent = avatar.dataset.name || 'Full Name';
+    }
+  })();
+
+  // ── Init probation section display ──
+  document.addEventListener('DOMContentLoaded', function() {
+    const status = document.getElementById('job_status').value;
+    toggleProbation(status);
+  });
+</script>
+
+</body>
+</html>

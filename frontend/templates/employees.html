@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EmpTrack Pro — Employees</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="app-body">
+
+<div class="app-layout">
+
+  <!-- ═══════════════════════════════════════
+       SIDEBAR
+  ═══════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar__brand">
+      <div class="sidebar__logo">
+        <span class="logo-icon">ET</span>
+      </div>
+      <div class="sidebar__brand-text">
+        <span class="sidebar__brand-name">EmpTrack <strong>Pro</strong></span>
+        <span class="sidebar__brand-sub">IMSciences</span>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+
+      <div class="nav-section">
+        <span class="nav-section__label">Overview</span>
+        <a href="{{ url_for('dashboard') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Dashboard</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Workforce</span>
+
+        <a href="{{ url_for('employees') }}" class="nav-item nav-item--active">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Employees</span>
+          <span class="nav-item__badge">{{ stats.total_employees }}</span>
+        </a>
+
+        <a href="{{ url_for('add_employee') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <line x1="19" y1="8" x2="19" y2="14"/>
+              <line x1="22" y1="11" x2="16" y2="11"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Add Employee</span>
+        </a>
+
+        <a href="{{ url_for('departments') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Departments</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Tracking</span>
+
+        <a href="{{ url_for('probation') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Probation</span>
+          <span class="nav-item__badge nav-item__badge--warn">{{ stats.on_probation }}</span>
+        </a>
+
+        <a href="{{ url_for('salary_history') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Salary History</span>
+        </a>
+
+        <a href="{{ url_for('activity_logs') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/>
+              <line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Activity Logs</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Reports</span>
+        <a href="{{ url_for('reports') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Reports</span>
+        </a>
+      </div>
+
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="sidebar__user">
+        <div class="sidebar__user-avatar">
+          <span>{{ current_user.username[:2]|upper }}</span>
+        </div>
+        <div class="sidebar__user-info">
+          <span class="sidebar__user-name">{{ current_user.username }}</span>
+          <span class="sidebar__user-role">{{ current_user.role }}</span>
+        </div>
+        <a href="{{ url_for('logout') }}" class="sidebar__logout" title="Logout">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ═══════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════ -->
+  <div class="main-wrap">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar__left">
+        <button class="topbar__menu-btn" id="menuToggle" aria-label="Toggle sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <div class="topbar__breadcrumb">
+          <span class="breadcrumb__root">EmpTrack Pro</span>
+          <span class="breadcrumb__sep">/</span>
+          <span class="breadcrumb__current">Employees</span>
+        </div>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__date" id="currentDate"></div>
+        <div class="topbar__notification">
+          <button class="notif-btn" aria-label="Notifications">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            {% if stats.on_probation > 0 %}
+            <span class="notif-btn__dot"></span>
+            {% endif %}
+          </button>
+        </div>
+        <a href="{{ url_for('profile') }}" class="topbar__profile">
+          <div class="topbar__avatar">{{ current_user.username[:2]|upper }}</div>
+        </a>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="main-content">
+
+      <!-- Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert--{{ category }}" style="margin-bottom: 16px;">
+            <span class="alert__icon">{% if category == 'error' %}✕{% else %}✓{% endif %}</span>
+            <span class="alert__text">{{ message }}</span>
+          </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="page-header__text">
+          <h1 class="page-header__title">Employee Management</h1>
+          <p class="page-header__subtitle">
+            Manage employee records, departments, and workforce information.
+          </p>
+        </div>
+        <div class="page-header__actions">
+          <a href="{{ url_for('reports') }}" class="btn btn--outline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Export CSV
+          </a>
+          {% if current_user.role in ['HR Manager', 'Administrator', 'Admin'] %}
+          <a href="{{ url_for('add_employee') }}" class="btn btn--primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Add Employee
+          </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- ─── STATS CARDS ─── -->
+      <section class="metrics-grid">
+
+        <div class="metric-card metric-card--blue">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Total Employees</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.total_employees }}</div>
+          <div class="metric-card__delta metric-card__delta--up">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="18 15 12 9 6 15"/>
+            </svg>
+            +{{ stats.new_this_month }} this month
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--green">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Active Employees</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.active_employees }}</div>
+          <div class="metric-card__delta metric-card__delta--up">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="18 15 12 9 6 15"/>
+            </svg>
+            {{ stats.retention_rate }}% retention rate
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--amber">
+          <div class="metric-card__header">
+            <span class="metric-card__label">On Probation</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.on_probation }}</div>
+          <div class="metric-card__delta metric-card__delta--warn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            {{ stats.probation_ending_soon }} ending soon
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--red">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Left Employees</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.left_employees }}</div>
+          <div class="metric-card__delta metric-card__delta--neutral">
+            {{ stats.turnover_rate }}% turnover rate
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ─── SEARCH & FILTERS ─── -->
+      <div class="table-card emp-filter-card">
+        <form method="GET" action="{{ url_for('employees') }}" class="emp-filters__form">
+
+          <div class="emp-filters__search">
+            <span class="emp-filters__search-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </span>
+            <input
+              class="emp-filters__input"
+              type="text"
+              name="search"
+              placeholder="Search by name or employee ID..."
+              value="{{ request.args.get('search', '') }}"
+            />
+          </div>
+
+          <select class="emp-filters__select" name="department">
+            <option value="">All Departments</option>
+            {% for dept in departments %}
+            <option value="{{ dept.department_id }}"
+              {% if request.args.get('department') == dept.department_id|string %}selected{% endif %}>
+              {{ dept.department_name }}
+            </option>
+            {% endfor %}
+          </select>
+
+          <select class="emp-filters__select" name="status">
+            <option value="">All Status</option>
+            <option value="Active"
+              {% if request.args.get('status') == 'Active' %}selected{% endif %}>Active</option>
+            <option value="Probation"
+              {% if request.args.get('status') == 'Probation' %}selected{% endif %}>Probation</option>
+            <option value="Left"
+              {% if request.args.get('status') == 'Left' %}selected{% endif %}>Left</option>
+          </select>
+
+          <select class="emp-filters__select" name="emp_type">
+            <option value="">All Types</option>
+            <option value="Full-time"
+              {% if request.args.get('emp_type') == 'Full-time' %}selected{% endif %}>Full-time</option>
+            <option value="Part-time"
+              {% if request.args.get('emp_type') == 'Part-time' %}selected{% endif %}>Part-time</option>
+            <option value="Contract"
+              {% if request.args.get('emp_type') == 'Contract' %}selected{% endif %}>Contract</option>
+          </select>
+
+          <button type="submit" class="btn btn--primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+            </svg>
+            Filter
+          </button>
+
+          {% if request.args.get('search') or request.args.get('department') or request.args.get('status') or request.args.get('emp_type') %}
+          <a href="{{ url_for('employees') }}" class="btn btn--outline">Clear</a>
+          {% endif %}
+
+        </form>
+      </div>
+
+      <!-- ─── EMPLOYEE TABLE ─── -->
+      <div class="table-card">
+
+        <div class="table-card__header">
+          <h3 class="table-card__title">
+            All Employees
+            <span class="alert-badge" style="background:var(--blue-50);color:var(--blue-600);">
+              {{ pagination.total }}
+            </span>
+          </h3>
+          <span class="text-muted" style="font-size:12px;">
+            Showing {{ pagination.start }}–{{ pagination.end }} of {{ pagination.total }} employees
+          </span>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Employee ID</th>
+                <th>Full Name</th>
+                <th>Department</th>
+                <th>Team</th>
+                <th>Job Role</th>
+                <th>Type</th>
+                <th>Salary</th>
+                <th>Status</th>
+                <th>Joining Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {% for emp in employees %}
+              <tr>
+
+                <!-- Employee ID -->
+                <td>
+                  <span style="font-family:monospace; font-size:12px; font-weight:500; color:var(--color-text-secondary);">
+                    {{ emp.employee_id }}
+                  </span>
+                </td>
+
+                <!-- Full Name -->
+                <td>
+                  <div class="emp-cell">
+                    <div class="emp-avatar emp-avatar--{{ emp.avatar_color }}">
+                      {{ emp.initials }}
+                    </div>
+                    <div class="emp-info">
+                      <span class="emp-name">{{ emp.full_name }}</span>
+                      <span class="emp-id">{{ emp.prefix }}</span>
+                    </div>
+                  </div>
+                </td>
+
+                <!-- Department -->
+                <td>
+                  <span class="dept-tag dept-tag--{{ emp.department_slug }}">
+                    {{ emp.department_name }}
+                  </span>
+                </td>
+
+                <!-- Team -->
+                <td class="text-muted">{{ emp.team_name }}</td>
+
+                <!-- Job Role -->
+                <td class="text-muted">{{ emp.role_name }}</td>
+
+                <!-- Employment Type -->
+                <td>
+                  <span class="dept-tag">{{ emp.employment_type }}</span>
+                </td>
+
+                <!-- Salary -->
+                <td class="text-muted">
+                  {% if emp.salary %}
+                    PKR {{ "{:,.0f}".format(emp.salary) }}
+                  {% else %}
+                    —
+                  {% endif %}
+                </td>
+
+                <!-- Status -->
+                <td>
+                  <span class="status-badge status-badge--{{ emp.job_status | lower }}">
+                    {{ emp.job_status }}
+                  </span>
+                </td>
+
+                <!-- Joining Date -->
+                <td class="text-muted">{{ emp.job_start_date }}</td>
+
+                <!-- Actions -->
+                <td>
+                  <div class="emp-actions">
+                    <a href="{{ url_for('view_employee', employee_id=emp.employee_id) }}"
+                       class="emp-action-btn emp-action-btn--view"
+                       title="View Profile">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                      View
+                    </a>
+                    {% if current_user.role in ['HR Manager', 'Administrator', 'Admin'] %}
+                    <a href="{{ url_for('edit_employee', employee_id=emp.employee_id) }}"
+                       class="emp-action-btn emp-action-btn--edit"
+                       title="Edit Employee">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                      </svg>
+                      Edit
+                    </a>
+                    <form method="POST"
+                          action="{{ url_for('delete_employee', employee_id=emp.employee_id) }}"
+                          onsubmit="return confirm('Are you sure you want to delete {{ emp.full_name }}? This cannot be undone.');"
+                          style="display:inline;">
+                      <button type="submit"
+                              class="emp-action-btn emp-action-btn--delete"
+                              title="Delete Employee">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="3 6 5 6 21 6"/>
+                          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                          <path d="M10 11v6"/><path d="M14 11v6"/>
+                          <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                        </svg>
+                        Delete
+                      </button>
+                    </form>
+                    {% endif %}
+                  </div>
+                </td>
+
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="10" style="text-align:center; padding:60px 24px;">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gray-300)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span style="font-size:14px;color:var(--color-text-muted);">
+                      No employees found matching your criteria.
+                    </span>
+                    <a href="{{ url_for('employees') }}" class="btn btn--outline" style="font-size:12px;">
+                      Clear Filters
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ─── PAGINATION ─── -->
+        {% if pagination.total_pages > 1 %}
+        <div class="emp-pagination">
+          <span class="emp-pagination__info text-muted">
+            Showing {{ pagination.start }}–{{ pagination.end }} of {{ pagination.total }} employees
+          </span>
+          <div class="emp-pagination__controls">
+
+            {% if pagination.has_prev %}
+            <a href="{{ url_for('employees',
+                        page=pagination.current_page - 1,
+                        search=request.args.get('search',''),
+                        department=request.args.get('department',''),
+                        status=request.args.get('status',''),
+                        emp_type=request.args.get('emp_type','')) }}"
+               class="emp-pagination__btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+              Prev
+            </a>
+            {% else %}
+            <span class="emp-pagination__btn emp-pagination__btn--disabled">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+              Prev
+            </span>
+            {% endif %}
+
+            {% for page_num in pagination.page_range %}
+              {% if page_num == '...' %}
+              <span class="emp-pagination__ellipsis">…</span>
+              {% else %}
+              <a href="{{ url_for('employees',
+                          page=page_num,
+                          search=request.args.get('search',''),
+                          department=request.args.get('department',''),
+                          status=request.args.get('status',''),
+                          emp_type=request.args.get('emp_type','')) }}"
+                 class="emp-pagination__btn {% if page_num == pagination.current_page %}emp-pagination__btn--active{% endif %}">
+                {{ page_num }}
+              </a>
+              {% endif %}
+            {% endfor %}
+
+            {% if pagination.has_next %}
+            <a href="{{ url_for('employees',
+                        page=pagination.current_page + 1,
+                        search=request.args.get('search',''),
+                        department=request.args.get('department',''),
+                        status=request.args.get('status',''),
+                        emp_type=request.args.get('emp_type','')) }}"
+               class="emp-pagination__btn">
+              Next
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </a>
+            {% else %}
+            <span class="emp-pagination__btn emp-pagination__btn--disabled">
+              Next
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </span>
+            {% endif %}
+
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  // Live date
+  const dateEl = document.getElementById('currentDate');
+  if (dateEl) {
+    dateEl.textContent = new Date().toLocaleDateString('en-PK', {
+      weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
+    });
+  }
+
+  // Sidebar toggle
+  document.getElementById('menuToggle').addEventListener('click', function () {
+    document.getElementById('sidebar').classList.toggle('sidebar--open');
+  });
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EmpTrack Pro — Reports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="app-body">
+
+<div class="app-layout">
+
+  <!-- ═══════════════════════════════════════
+       SIDEBAR
+  ═══════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__brand">
+      <div class="sidebar__logo"><span class="logo-icon">ET</span></div>
+      <div class="sidebar__brand-text">
+        <span class="sidebar__brand-name">EmpTrack <strong>Pro</strong></span>
+        <span class="sidebar__brand-sub">IMSciences</span>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+
+      <div class="nav-section">
+        <span class="nav-section__label">Overview</span>
+        <a href="{{ url_for('dashboard') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Dashboard</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Workforce</span>
+        <a href="{{ url_for('employees') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Employees</span>
+          <span class="nav-item__badge">{{ stats.total_employees }}</span>
+        </a>
+        <a href="{{ url_for('add_employee') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <line x1="19" y1="8" x2="19" y2="14"/>
+              <line x1="22" y1="11" x2="16" y2="11"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Add Employee</span>
+        </a>
+        <a href="{{ url_for('departments') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Departments</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Tracking</span>
+        <a href="{{ url_for('probation') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Probation</span>
+          <span class="nav-item__badge nav-item__badge--warn">{{ stats.on_probation }}</span>
+        </a>
+        <a href="{{ url_for('salary_history') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Salary History</span>
+        </a>
+        <a href="{{ url_for('activity_logs') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/>
+              <line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Activity Logs</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Reports</span>
+        <a href="{{ url_for('reports') }}" class="nav-item nav-item--active">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Reports</span>
+        </a>
+      </div>
+
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="sidebar__user">
+        <div class="sidebar__user-avatar">
+          <span>{{ current_user.username[:2]|upper }}</span>
+        </div>
+        <div class="sidebar__user-info">
+          <span class="sidebar__user-name">{{ current_user.username }}</span>
+          <span class="sidebar__user-role">{{ current_user.role }}</span>
+        </div>
+        <a href="{{ url_for('logout') }}" class="sidebar__logout" title="Logout">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════ -->
+  <div class="main-wrap">
+
+    <header class="topbar">
+      <div class="topbar__left">
+        <button class="topbar__menu-btn" id="menuToggle" aria-label="Toggle sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <div class="topbar__breadcrumb">
+          <span class="breadcrumb__root">EmpTrack Pro</span>
+          <span class="breadcrumb__sep">/</span>
+          <span class="breadcrumb__current">Reports</span>
+        </div>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__date" id="currentDate"></div>
+        <div class="topbar__notification">
+          <button class="notif-btn" aria-label="Notifications">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            {% if stats.on_probation > 0 %}
+            <span class="notif-btn__dot"></span>
+            {% endif %}
+          </button>
+        </div>
+        <a href="{{ url_for('profile') }}" class="topbar__profile">
+          <div class="topbar__avatar">{{ current_user.username[:2]|upper }}</div>
+        </a>
+      </div>
+    </header>
+
+    <main class="main-content">
+
+      <!-- Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert--{{ category }}">
+            <span class="alert__icon">{% if category == 'error' %}✕{% else %}✓{% endif %}</span>
+            <span class="alert__text">{{ message }}</span>
+          </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="page-header__text">
+          <h1 class="page-header__title">Reports & Analytics</h1>
+          <p class="page-header__subtitle">
+            Visual insights into workforce distribution, hiring trends, and salary analytics.
+          </p>
+        </div>
+        <div class="page-header__actions">
+          <button class="btn btn--outline" onclick="window.print()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <rect x="6" y="14" width="12" height="8"/>
+            </svg>
+            Print Report
+          </button>
+        </div>
+      </div>
+
+      <!-- ─── KPI SUMMARY CARDS ─── -->
+      <section class="metrics-grid">
+
+        <div class="metric-card metric-card--blue">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Total Employees</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.total_employees }}</div>
+          <div class="metric-card__delta metric-card__delta--up">
+            +{{ stats.new_this_month }} this month
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--green">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Active Staff</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.active_employees }}</div>
+          <div class="metric-card__delta metric-card__delta--up">
+            {{ stats.retention_rate }}% retention
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--amber">
+          <div class="metric-card__header">
+            <span class="metric-card__label">On Probation</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.on_probation }}</div>
+          <div class="metric-card__delta metric-card__delta--warn">
+            {{ stats.probation_ending_soon }} ending soon
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--red">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Turnover (90d)</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.departures_90d }}</div>
+          <div class="metric-card__delta metric-card__delta--neutral">
+            {{ stats.turnover_rate }}% turnover rate
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ─── CHARTS ROW 1 ─── -->
+      <section class="charts-grid">
+
+        <!-- Employment Type Donut -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <h3 class="chart-card__title">Employment Types</h3>
+            <span class="chart-card__subtitle">Current breakdown</span>
+          </div>
+          <div class="chart-card__body chart-card__body--donut">
+            <div class="chart-donut-wrap">
+              <canvas id="donutChart" width="180" height="180"></canvas>
+            </div>
+            <div class="chart-legend">
+              {% for item in employment_types %}
+              <div class="legend-item">
+                <span class="legend-dot" data-color="{{ item.color }}"></span>
+                <span class="legend-label">{{ item.label }}</span>
+                <span class="legend-val">{{ item.count }}</span>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly Hiring Trend -->
+        <div class="chart-card chart-card--wide">
+          <div class="chart-card__header">
+            <h3 class="chart-card__title">Monthly Hiring Trend</h3>
+            <span class="chart-card__subtitle">Last 6 months</span>
+          </div>
+          <div class="chart-card__body">
+            <canvas id="hiringChart"></canvas>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ─── CHARTS ROW 2 ─── -->
+      <section class="charts-grid" style="margin-top:0;">
+
+        <!-- Department Distribution Bar -->
+        <div class="chart-card chart-card--wide">
+          <div class="chart-card__header">
+            <h3 class="chart-card__title">Employees by Department</h3>
+            <span class="chart-card__subtitle">Headcount distribution</span>
+          </div>
+          <div class="chart-card__body">
+            <canvas id="deptChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Job Status Donut -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <h3 class="chart-card__title">Job Status</h3>
+            <span class="chart-card__subtitle">Current workforce status</span>
+          </div>
+          <div class="chart-card__body chart-card__body--donut">
+            <div class="chart-donut-wrap">
+              <canvas id="statusChart" width="180" height="180"></canvas>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <span class="legend-dot" data-color="#3B6D11"></span>
+                <span class="legend-label">Active</span>
+                <span class="legend-val">{{ stats.active_employees }}</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot" data-color="#854F0B"></span>
+                <span class="legend-label">Probation</span>
+                <span class="legend-val">{{ stats.on_probation }}</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot" data-color="#A32D2D"></span>
+                <span class="legend-label">Left</span>
+                <span class="legend-val">{{ stats.left_employees }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ─── DEPARTMENT TABLE REPORT ─── -->
+      <section>
+        <div class="table-card">
+          <div class="table-card__header">
+            <h3 class="table-card__title">Department Summary Report</h3>
+            <span class="text-muted" style="font-size:12px;">
+              Full department breakdown
+            </span>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Department</th>
+                  <th>Total Employees</th>
+                  <th>Active</th>
+                  <th>On Probation</th>
+                  <th>Left</th>
+                  <th>Teams</th>
+                  <th>Workforce %</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for dept in departments %}
+                <tr>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:10px;">
+                      <div class="dept-card__icon dept-card__icon--{{ dept.color }}"
+                           style="width:28px;height:28px;flex-shrink:0;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        </svg>
+                      </div>
+                      <span style="font-weight:500;font-size:13px;">
+                        {{ dept.department_name }}
+                      </span>
+                    </div>
+                  </td>
+                  <td>
+                    <span style="font-family:var(--font-display);font-size:15px;
+                                 font-weight:600;">
+                      {{ dept.employee_count }}
+                    </span>
+                  </td>
+                  <td>
+                    <span class="status-badge status-badge--active">
+                      {{ dept.active_count }}
+                    </span>
+                  </td>
+                  <td>
+                    {% if dept.probation_count > 0 %}
+                    <span class="status-badge status-badge--probation">
+                      {{ dept.probation_count }}
+                    </span>
+                    {% else %}
+                    <span class="text-muted">—</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if dept.left_count > 0 %}
+                    <span class="status-badge status-badge--left">
+                      {{ dept.left_count }}
+                    </span>
+                    {% else %}
+                    <span class="text-muted">—</span>
+                    {% endif %}
+                  </td>
+                  <td class="text-muted">{{ dept.team_count }}</td>
+                  <td>
+                    <div style="display:flex;align-items:center;
+                                gap:8px;min-width:120px;">
+                      <div class="dept-card__bar" style="flex:1;height:6px;">
+                        <div class="dept-card__bar-fill dept-card__bar-fill--{{ dept.color }}"
+                             data-width="{{ dept.bar_percent }}">
+                        </div>
+                      </div>
+                      <span style="font-size:11px;font-weight:500;
+                                   color:var(--color-text-secondary);
+                                   white-space:nowrap;">
+                        {{ dept.bar_percent }}%
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+              <tfoot>
+                <tr style="background:var(--gray-50);">
+                  <td style="font-weight:600;font-size:13px;padding:10px 16px;">
+                    Total
+                  </td>
+                  <td style="font-family:var(--font-display);font-size:15px;
+                              font-weight:700;padding:10px 16px;">
+                    {{ stats.total_employees }}
+                  </td>
+                  <td style="padding:10px 16px;">
+                    <span class="status-badge status-badge--active">
+                      {{ stats.active_employees }}
+                    </span>
+                  </td>
+                  <td style="padding:10px 16px;">
+                    <span class="status-badge status-badge--probation">
+                      {{ stats.on_probation }}
+                    </span>
+                  </td>
+                  <td style="padding:10px 16px;">
+                    <span class="status-badge status-badge--left">
+                      {{ stats.left_employees }}
+                    </span>
+                  </td>
+                  <td style="padding:10px 16px;" class="text-muted">
+                    {{ report_stats.total_teams }}
+                  </td>
+                  <td style="padding:10px 16px;">
+                    <span style="font-size:12px;font-weight:600;
+                                 color:var(--blue-600);">100%</span>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── SALARY REPORT ─── -->
+      <section>
+        <div class="table-card">
+          <div class="chart-card__header" style="border-bottom:1px solid var(--color-border-light);">
+            <h3 class="chart-card__title">Salary Analytics</h3>
+            <span class="chart-card__subtitle">Compensation overview</span>
+          </div>
+          <div class="report-salary-grid">
+
+            <div class="report-salary-item">
+              <span class="report-salary-item__label">Highest Salary</span>
+              <span class="report-salary-item__value report-salary-item__value--high">
+                PKR {{ "{:,.0f}".format(salary_report.highest) if salary_report.highest else '—' }}
+              </span>
+            </div>
+            <div class="report-salary-item">
+              <span class="report-salary-item__label">Lowest Salary</span>
+              <span class="report-salary-item__value report-salary-item__value--low">
+                PKR {{ "{:,.0f}".format(salary_report.lowest) if salary_report.lowest else '—' }}
+              </span>
+            </div>
+            <div class="report-salary-item">
+              <span class="report-salary-item__label">Average Salary</span>
+              <span class="report-salary-item__value">
+                PKR {{ "{:,.0f}".format(salary_report.average) if salary_report.average else '—' }}
+              </span>
+            </div>
+            <div class="report-salary-item">
+              <span class="report-salary-item__label">Total Payroll</span>
+              <span class="report-salary-item__value report-salary-item__value--total">
+                PKR {{ "{:,.0f}".format(salary_report.total_payroll) if salary_report.total_payroll else '—' }}
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  // ── Live date ──
+  const dateEl = document.getElementById('currentDate');
+  if (dateEl) {
+    dateEl.textContent = new Date().toLocaleDateString('en-PK', {
+      weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
+    });
+  }
+
+  // ── Sidebar toggle ──
+  document.getElementById('menuToggle').addEventListener('click', function () {
+    document.getElementById('sidebar').classList.toggle('sidebar--open');
+  });
+
+  // ── Set legend dot colors ──
+  document.querySelectorAll('.legend-dot[data-color]').forEach(function (el) {
+    el.style.background = el.dataset.color;
+  });
+
+  // ── Set bar widths ──
+  document.querySelectorAll('[data-width]').forEach(function (el) {
+    el.style.width = el.dataset.width + '%';
+  });
+
+  // ── Chart data from Flask (safe — no Jinja inside script) ──
+  const chartDataEl = document.getElementById('chartData');
+  const chartData   = JSON.parse(chartDataEl.textContent);
+
+  // ── Donut — Employment Types ──
+  new Chart(document.getElementById('donutChart').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels:   chartData.emp_type_labels,
+      datasets: [{
+        data:            chartData.emp_type_counts,
+        backgroundColor: chartData.emp_type_colors,
+        borderColor:     '#ffffff',
+        borderWidth:     3,
+        hoverOffset:     6,
+      }]
+    },
+    options: {
+      responsive: false,
+      cutout: '68%',
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: {
+          label: ctx => ` ${ctx.label}: ${ctx.raw} employees`
+        }}
+      }
+    }
+  });
+
+  // ── Bar — Hiring Trend ──
+  new Chart(document.getElementById('hiringChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels:   chartData.hiring_months,
+      datasets: [{
+        label:                'New Hires',
+        data:                 chartData.hiring_counts,
+        backgroundColor:      '#185FA5',
+        borderRadius:         6,
+        borderSkipped:        false,
+        hoverBackgroundColor: '#0C447C',
+      }]
+    },
+    options: {
+      responsive:          true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: {
+          label: ctx => ` ${ctx.raw} new hires`
+        }}
+      },
+      scales: {
+        x: { grid: { display: false },
+             ticks: { color: '#888780', font: { size: 12 } } },
+        y: { grid: { color: '#f0ede8' },
+             ticks: { color: '#888780', font: { size: 12 }, stepSize: 5 },
+             beginAtZero: true }
+      }
+    }
+  });
+
+  // ── Bar — Department Headcount ──
+  new Chart(document.getElementById('deptChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels:   chartData.dept_labels,
+      datasets: [{
+        label:           'Employees',
+        data:            chartData.dept_counts,
+        backgroundColor: chartData.dept_colors,
+        borderRadius:    6,
+        borderSkipped:   false,
+      }]
+    },
+    options: {
+      responsive:          true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: {
+          label: ctx => ` ${ctx.raw} employees`
+        }}
+      },
+      scales: {
+        x: { grid: { display: false },
+             ticks: { color: '#888780', font: { size: 12 } } },
+        y: { grid: { color: '#f0ede8' },
+             ticks: { color: '#888780', font: { size: 12 } },
+             beginAtZero: true }
+      }
+    }
+  });
+
+  // ── Donut — Job Status ──
+  new Chart(document.getElementById('statusChart').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels:   ['Active', 'Probation', 'Left'],
+      datasets: [{
+        data:            chartData.status_counts,
+        backgroundColor: ['#3B6D11', '#854F0B', '#A32D2D'],
+        borderColor:     '#ffffff',
+        borderWidth:     3,
+        hoverOffset:     6,
+      }]
+    },
+    options: {
+      responsive: false,
+      cutout: '68%',
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: {
+          label: ctx => ` ${ctx.label}: ${ctx.raw}`
+        }}
+      }
+    }
+  });
+</script>
+
+<!-- Safe JSON data island — no Jinja inside script tags -->
+<script id="chartData" type="application/json">
+{
+  "emp_type_labels":  {{ employment_types | map(attribute='label') | list | tojson }},
+  "emp_type_counts":  {{ employment_types | map(attribute='count') | list | tojson }},
+  "emp_type_colors":  {{ employment_types | map(attribute='color') | list | tojson }},
+  "hiring_months":    {{ hiring_trend | map(attribute='month') | list | tojson }},
+  "hiring_counts":    {{ hiring_trend | map(attribute='count') | list | tojson }},
+  "dept_labels":      {{ departments | map(attribute='department_name') | list | tojson }},
+  "dept_counts":      {{ departments | map(attribute='employee_count') | list | tojson }},
+  "dept_colors":      {{ dept_chart_colors | tojson }},
+  "status_counts":    [{{ stats.active_employees }}, {{ stats.on_probation }}, {{ stats.left_employees }}]
+}
+</script>
+
+</body>
+</html>

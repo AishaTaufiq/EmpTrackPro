@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EmpTrack Pro — Departments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="app-body">
+
+<div class="app-layout">
+
+  <!-- ═══════════════════════════════════════
+       SIDEBAR
+  ═══════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar__brand">
+      <div class="sidebar__logo">
+        <span class="logo-icon">ET</span>
+      </div>
+      <div class="sidebar__brand-text">
+        <span class="sidebar__brand-name">EmpTrack <strong>Pro</strong></span>
+        <span class="sidebar__brand-sub">IMSciences</span>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+
+      <div class="nav-section">
+        <span class="nav-section__label">Overview</span>
+        <a href="{{ url_for('dashboard') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Dashboard</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Workforce</span>
+        <a href="{{ url_for('employees') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Employees</span>
+          <span class="nav-item__badge">{{ stats.total_employees }}</span>
+        </a>
+        <a href="{{ url_for('add_employee') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <line x1="19" y1="8" x2="19" y2="14"/>
+              <line x1="22" y1="11" x2="16" y2="11"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Add Employee</span>
+        </a>
+        <a href="{{ url_for('departments') }}" class="nav-item nav-item--active">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Departments</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Tracking</span>
+        <a href="{{ url_for('probation') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Probation</span>
+          <span class="nav-item__badge nav-item__badge--warn">{{ stats.on_probation }}</span>
+        </a>
+        <a href="{{ url_for('salary_history') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Salary History</span>
+        </a>
+        <a href="{{ url_for('activity_logs') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/>
+              <line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Activity Logs</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section__label">Reports</span>
+        <a href="{{ url_for('reports') }}" class="nav-item">
+          <span class="nav-item__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </span>
+          <span class="nav-item__label">Reports</span>
+        </a>
+      </div>
+
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="sidebar__user">
+        <div class="sidebar__user-avatar">
+          <span>{{ current_user.username[:2]|upper }}</span>
+        </div>
+        <div class="sidebar__user-info">
+          <span class="sidebar__user-name">{{ current_user.username }}</span>
+          <span class="sidebar__user-role">{{ current_user.role }}</span>
+        </div>
+        <a href="{{ url_for('logout') }}" class="sidebar__logout" title="Logout">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ═══════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════ -->
+  <div class="main-wrap">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar__left">
+        <button class="topbar__menu-btn" id="menuToggle" aria-label="Toggle sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <div class="topbar__breadcrumb">
+          <span class="breadcrumb__root">EmpTrack Pro</span>
+          <span class="breadcrumb__sep">/</span>
+          <span class="breadcrumb__current">Departments</span>
+        </div>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__date" id="currentDate"></div>
+        <div class="topbar__notification">
+          <button class="notif-btn" aria-label="Notifications">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            {% if stats.on_probation > 0 %}
+            <span class="notif-btn__dot"></span>
+            {% endif %}
+          </button>
+        </div>
+        <a href="{{ url_for('profile') }}" class="topbar__profile">
+          <div class="topbar__avatar">{{ current_user.username[:2]|upper }}</div>
+        </a>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="main-content">
+
+      <!-- Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert--{{ category }}">
+            <span class="alert__icon">{% if category == 'error' %}✕{% else %}✓{% endif %}</span>
+            <span class="alert__text">{{ message }}</span>
+          </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="page-header__text">
+          <h1 class="page-header__title">Departments</h1>
+          <p class="page-header__subtitle">
+            Manage departments, teams, and workforce distribution across your organisation.
+          </p>
+        </div>
+        <div class="page-header__actions">
+          {% if current_user.role in ['HR Manager', 'Administrator', 'Admin'] %}
+          <button class="btn btn--primary" onclick="toggleAddModal(true)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Add Department
+          </button>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- ─── STATS CARDS ─── -->
+      <section class="metrics-grid">
+
+        <div class="metric-card metric-card--blue">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Total Departments</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ dept_stats.total_departments }}</div>
+          <div class="metric-card__delta metric-card__delta--neutral">
+            Active divisions
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--teal">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Total Teams</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ dept_stats.total_teams }}</div>
+          <div class="metric-card__delta metric-card__delta--neutral">
+            Across all departments
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--green">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Total Employees</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ stats.total_employees }}</div>
+          <div class="metric-card__delta metric-card__delta--up">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="18 15 12 9 6 15"/>
+            </svg>
+            +{{ stats.new_this_month }} this month
+          </div>
+        </div>
+
+        <div class="metric-card metric-card--amber">
+          <div class="metric-card__header">
+            <span class="metric-card__label">Avg per Department</span>
+            <div class="metric-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-card__value">{{ dept_stats.avg_per_dept }}</div>
+          <div class="metric-card__delta metric-card__delta--neutral">
+            Employees per dept
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ─── DEPARTMENT CARDS GRID ─── -->
+      <section class="dept-cards-section">
+        <div class="table-card">
+          <div class="table-card__header">
+            <h3 class="table-card__title">Department Overview</h3>
+            <span class="text-muted" style="font-size:12px;">
+              {{ departments | length }} departments
+            </span>
+          </div>
+          <div class="dept-overview-grid">
+            {% for dept in departments %}
+            <div class="dept-overview-card dept-overview-card--{{ dept.color }}"
+                 onclick="toggleTeams('teams-{{ dept.department_id }}', this)">
+
+              <div class="dept-overview-card__top">
+                <div class="dept-overview-card__icon dept-card__icon--{{ dept.color }}">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                  </svg>
+                </div>
+                {% if current_user.role in ['HR Manager', 'Administrator', 'Admin'] %}
+                <div class="dept-overview-card__actions">
+                  <button class="emp-action-btn emp-action-btn--edit edit-dept-btn"
+                          data-dept-id="{{ dept.department_id }}"
+                          data-dept-name="{{ dept.department_name }}"
+                          title="Edit">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                  </button>
+                  <form method="POST"
+                        action="{{ url_for('delete_department', department_id=dept.department_id) }}"
+                        onsubmit="return confirm('Delete {{ dept.department_name }}? All teams under it will also be removed.');"
+                        style="display:inline;"
+                        onclick="event.stopPropagation()">
+                    <button type="submit" class="emp-action-btn emp-action-btn--delete" title="Delete">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                        <path d="M10 11v6"/><path d="M14 11v6"/>
+                      </svg>
+                    </button>
+                  </form>
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="dept-overview-card__name">{{ dept.department_name }}</div>
+
+              <div class="dept-overview-card__meta">
+                <span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                  </svg>
+                  {{ dept.employee_count }} employees
+                </span>
+                <span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                  {{ dept.team_count }} teams
+                </span>
+              </div>
+
+              <div class="dept-card__bar" style="margin-top: 10px;">
+                <div class="dept-card__bar-fill dept-card__bar-fill--{{ dept.color }} dept-bar-fill"
+                     data-width="{{ dept.bar_percent }}"></div>
+              </div>
+              <div style="font-size:10px; color:var(--color-text-muted); margin-top:4px; text-align:right;">
+                {{ dept.bar_percent }}% of workforce
+              </div>
+
+              <!-- Teams List (collapsible) -->
+              <div class="dept-teams-list" id="teams-{{ dept.department_id }}"
+                   onclick="event.stopPropagation()">
+                <div class="dept-teams-list__header">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                  Teams in {{ dept.department_name }}
+                </div>
+                {% if dept.teams %}
+                  {% for team in dept.teams %}
+                  <div class="dept-teams-list__item">
+                    <span class="dept-teams-list__dot"></span>
+                    <span class="dept-teams-list__name">{{ team.team_name }}</span>
+                  </div>
+                  {% endfor %}
+                {% else %}
+                <div class="dept-teams-list__empty">No teams assigned yet.</div>
+                {% endif %}
+              </div>
+
+            </div>
+            {% else %}
+            <div style="grid-column:1/-1; text-align:center; padding:48px; color:var(--color-text-muted);">
+              No departments found. Add your first department above.
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── DEPARTMENT DETAIL TABLE ─── -->
+      <section>
+        <div class="table-card">
+          <div class="table-card__header">
+            <h3 class="table-card__title">Department Details</h3>
+            <span class="text-muted" style="font-size:12px;">
+              Full breakdown with team listings
+            </span>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Department</th>
+                  <th>Teams</th>
+                  <th>Employees</th>
+                  <th>Active</th>
+                  <th>On Probation</th>
+                  <th>Workforce %</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for dept in departments %}
+                <tr>
+
+                  <!-- Department Name -->
+                  <td>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                      <div class="dept-card__icon dept-card__icon--{{ dept.color }}"
+                           style="width:32px; height:32px; flex-shrink:0;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                          <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <div style="font-weight:500; font-size:13px;">
+                          {{ dept.department_name }}
+                        </div>
+                        <div style="font-size:11px; color:var(--color-text-muted);">
+                          ID: {{ dept.department_id }}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <!-- Teams -->
+                  <td>
+                    <div style="display:flex; flex-wrap:wrap; gap:4px;">
+                      {% if dept.teams %}
+                        {% for team in dept.teams %}
+                        <span class="dept-tag" style="font-size:10px;">
+                          {{ team.team_name }}
+                        </span>
+                        {% endfor %}
+                      {% else %}
+                      <span class="text-muted" style="font-size:12px;">No teams</span>
+                      {% endif %}
+                    </div>
+                  </td>
+
+                  <!-- Employee Count -->
+                  <td>
+                    <span style="font-family:var(--font-display); font-size:16px; font-weight:600; color:var(--color-text-primary);">
+                      {{ dept.employee_count }}
+                    </span>
+                  </td>
+
+                  <!-- Active -->
+                  <td>
+                    <span class="status-badge status-badge--active">
+                      {{ dept.active_count }}
+                    </span>
+                  </td>
+
+                  <!-- On Probation -->
+                  <td>
+                    {% if dept.probation_count > 0 %}
+                    <span class="status-badge status-badge--probation">
+                      {{ dept.probation_count }}
+                    </span>
+                    {% else %}
+                    <span class="text-muted">—</span>
+                    {% endif %}
+                  </td>
+
+                  <!-- Workforce % -->
+                  <td>
+                    <div style="display:flex; align-items:center; gap:8px; min-width:100px;">
+                      <div class="dept-card__bar" style="flex:1; height:6px;">
+                        <div class="dept-card__bar-fill dept-card__bar-fill--{{ dept.color }} dept-bar-fill"
+                             data-width="{{ dept.bar_percent }}"></div>
+                      </div>
+                      <span style="font-size:11px; font-weight:500; color:var(--color-text-secondary); white-space:nowrap;">
+                        {{ dept.bar_percent }}%
+                      </span>
+                    </div>
+                  </td>
+
+                  <!-- Actions -->
+                  <td>
+                    <div class="emp-actions">
+                      <button class="emp-action-btn emp-action-btn--edit edit-dept-btn"
+                              data-dept-id="{{ dept.department_id }}"
+                              data-dept-name="{{ dept.department_name }}">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                        Edit
+                      </button>
+                      <form method="POST"
+                            action="{{ url_for('delete_department', department_id=dept.department_id) }}"
+                            onsubmit="return confirm('Delete {{ dept.department_name }}?');"
+                            style="display:inline;">
+                        <button type="submit" class="emp-action-btn emp-action-btn--delete">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                            <path d="M10 11v6"/><path d="M14 11v6"/>
+                          </svg>
+                          Delete
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+
+                </tr>
+                {% else %}
+                <tr>
+                  <td colspan="7" style="text-align:center; padding:48px; color:var(--color-text-muted);">
+                    No departments found.
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     ADD DEPARTMENT MODAL
+═══════════════════════════════════════ -->
+<div class="dept-modal-overlay" id="addModalOverlay" onclick="toggleAddModal(false)">
+  <div class="dept-modal" onclick="event.stopPropagation()">
+
+    <div class="dept-modal__header">
+      <h3 class="dept-modal__title">Add New Department</h3>
+      <button class="dept-modal__close" onclick="toggleAddModal(false)" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <form method="POST" action="{{ url_for('add_department') }}" class="dept-modal__body">
+      <div class="addform-field">
+        <label class="addform-label" for="new_dept_name">
+          Department Name <span class="addform-required">*</span>
+        </label>
+        <input
+          class="addform-input"
+          type="text"
+          id="new_dept_name"
+          name="department_name"
+          placeholder="e.g. Information Technology"
+          required
+          autofocus
+        />
+      </div>
+      <div class="dept-modal__actions">
+        <button type="button" class="btn btn--outline" onclick="toggleAddModal(false)">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn--primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Add Department
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     EDIT DEPARTMENT MODAL
+═══════════════════════════════════════ -->
+<div class="dept-modal-overlay" id="editModalOverlay" onclick="closeEditModal()">
+  <div class="dept-modal" onclick="event.stopPropagation()">
+
+    <div class="dept-modal__header">
+      <h3 class="dept-modal__title">Edit Department</h3>
+      <button class="dept-modal__close" onclick="closeEditModal()" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <form method="POST" id="editDeptForm" action="" class="dept-modal__body">
+      <div class="addform-field">
+        <label class="addform-label" for="edit_dept_name">
+          Department Name <span class="addform-required">*</span>
+        </label>
+        <input
+          class="addform-input"
+          type="text"
+          id="edit_dept_name"
+          name="department_name"
+          placeholder="Department name"
+          required
+        />
+      </div>
+      <div class="dept-modal__actions">
+        <button type="button" class="btn btn--outline" onclick="closeEditModal()">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn--primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+            <polyline points="17 21 17 13 7 13 7 21"/>
+          </svg>
+          Save Changes
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<script>
+  // ── Live date ──
+  const dateEl = document.getElementById('currentDate');
+  if (dateEl) {
+    dateEl.textContent = new Date().toLocaleDateString('en-PK', {
+      weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
+    });
+  }
+
+  // ── Sidebar toggle ──
+  document.getElementById('menuToggle').addEventListener('click', function () {
+    document.getElementById('sidebar').classList.toggle('sidebar--open');
+  });
+
+  // ── Add Modal ──
+  function toggleAddModal(show) {
+    const overlay = document.getElementById('addModalOverlay');
+    overlay.classList.toggle('dept-modal-overlay--active', show);
+    if (show) document.getElementById('new_dept_name').focus();
+  }
+
+  // ── Edit Modal ──
+  function openEditModal(event, deptId, deptName) {
+    event.stopPropagation();
+    const overlay  = document.getElementById('editModalOverlay');
+    const form     = document.getElementById('editDeptForm');
+    const nameInput = document.getElementById('edit_dept_name');
+    form.action    = '/department/' + deptId + '/edit';
+    nameInput.value = deptName;
+    overlay.classList.add('dept-modal-overlay--active');
+    nameInput.focus();
+  }
+
+  function closeEditModal() {
+    document.getElementById('editModalOverlay')
+            .classList.remove('dept-modal-overlay--active');
+  }
+
+  // ── Toggle teams list inside card ──
+  function toggleTeams(teamsId, cardEl) {
+    const teamsDiv = document.getElementById(teamsId);
+    if (!teamsDiv) return;
+    const isOpen = teamsDiv.classList.contains('dept-teams-list--open');
+    // Close all first
+    document.querySelectorAll('.dept-teams-list--open').forEach(el => {
+      el.classList.remove('dept-teams-list--open');
+    });
+    document.querySelectorAll('.dept-overview-card--expanded').forEach(el => {
+      el.classList.remove('dept-overview-card--expanded');
+    });
+    // Open clicked if it was closed
+    if (!isOpen) {
+      teamsDiv.classList.add('dept-teams-list--open');
+      cardEl.classList.add('dept-overview-card--expanded');
+    }
+  }
+
+  // ── Close modals on Escape ──
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      toggleAddModal(false);
+      closeEditModal();
+    }
+  });
+
+  // ── Init bar widths from data attributes ──
+  document.querySelectorAll('.dept-bar-fill').forEach(bar => {
+    const width = bar.dataset.width;
+    if (width) bar.style.width = width + '%';
+  });
+
+  // ── Init edit buttons with data attributes ──
+  document.querySelectorAll('.edit-dept-btn').forEach(btn => {
+    btn.addEventListener('click', function (event) {
+      event.stopPropagation();
+      const deptId = this.dataset.deptId;
+      const deptName = this.dataset.deptName;
+      openEditModal(event, deptId, deptName);
+    });
+  });
+</script>
+
+</body>
+</html>
